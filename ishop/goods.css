@@ -1,0 +1,36 @@
+.GoodsTableFrame {
+    display: grid;
+    justify-content: center;
+}
+
+.GoodsTableRow {
+    width: 100vh;
+    display: grid;
+    grid-template-columns: 10% 20% 20% 30% 20%;
+}
+
+.GoodsTableCell {
+    height: 110px;
+    border: 1px solid black;
+    display: grid;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.GoodsTableHeaderCell {
+    height: 40px;
+    font-weight: bold;
+}
+
+.GoodsTableImg img {
+    height: 100px;
+}
+
+.GoodsTableWelcome {
+    text-align: center;
+    font-weight: bold;
+    word-spacing: 0.3em;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}

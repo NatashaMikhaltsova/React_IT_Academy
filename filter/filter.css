@@ -1,0 +1,30 @@
+#filterBlock{
+    display: flex;
+    justify-content: center;
+}
+
+.filterControls{
+    display: grid;
+    width: 300px;
+    grid-template-columns: 20% 60% 20%;
+    margin-bottom: 20px;
+}
+
+.FilterStringsBlock {
+    display: block;
+    text-align: center;
+    overflow-y:auto;
+    height: 70px;
+    width: 150px;
+    margin: 0 auto;
+}
+
+input,
+label {
+    display: block;
+}
+
+.FilterClear {
+    height: 22px;
+    align-self: flex-end;
+}

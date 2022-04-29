@@ -1,0 +1,15 @@
+.GoodsTableCell {
+    height: 110px;
+    border: 1px solid black;
+    display: grid;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.GoodsTableImg img {
+    height: 100px;
+}
+
+.GoodsTableSelected {
+    background-color: yellow;
+}

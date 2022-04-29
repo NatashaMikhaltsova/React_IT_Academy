@@ -18,7 +18,7 @@ const GoodsTable = React.createClass({
     },
 
     deleteClickedRow: function () {
-        this.props.cbDeletedRow(this.props.id, this.props.row);
+        this.props.cbDeletedRow(this.props.row);
     },
 
     render: function () {

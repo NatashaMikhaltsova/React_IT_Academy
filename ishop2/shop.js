@@ -30,20 +30,18 @@ const Shop = React.createClass({
         return {
             clickedRowKey: null,
             goods: this.props.initGoods,
-            highlightedRow: null,
         }
     },
 
     clickedRow: function (id) {
-        this.setState({ clickedRowKey: id, highlightedRow: id });
+        this.setState({ clickedRowKey: id});
     },
 
     isRowClicked: function (rowCode) {
         return this.state.clickedRowKey === rowCode;
     },
 
-    deleteRow: function (rowId, rowNum) {
-        this.setState({ rowToDelete: rowId });
+    deleteRow: function (rowNum) {
         let deletionConfirmed = confirm(`Вы действительно хотите ударить ${rowNum} строку?`);
         if (deletionConfirmed) {
             this.setState(prevState => {

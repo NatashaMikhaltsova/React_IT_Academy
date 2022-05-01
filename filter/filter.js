@@ -9,47 +9,47 @@ const Filter = React.createClass({
 
     getInitialState: function () {
         return {
-            currentArray: this.props.initArray,
+            finalArray: this.props.initArray,
             filterText: '',
-            nonSortedArray: this.props.initArray,
-            markCheckbox: false,
+            sortFlag: false,
         }
     },
 
-    filterSettings: function (elem) {
-        elem.persist();
-        if (elem.target.name === 'filterText') {
-            this.setState({ filterText: elem.target.value });
-            this.setState(prevState => { return { currentArray: this.props.initArray.filter(el => el.includes(prevState.filterText)) } });
-            this.setState(prevState => { return { nonSortedArray: prevState.currentArray } });
-        }
-        if (elem.target.name === 'sortingCheckbox') {
-            this.setState(prevState => { return { markCheckbox: !(prevState.markCheckbox) } });
-        }
-        if (elem.target.name === 'clearSorting') {
-            this.setState({ currentArray: this.props.initArray, filterText: '', markCheckbox: false });
-            this.setState(prevState => { return { nonSortedArray: prevState.currentArray } });
-        }
-        this.setState(prevState => { return { currentArray: (prevState.markCheckbox ? [...prevState.currentArray].sort() : prevState.nonSortedArray) } });
+    sortFlagChanged: function (e) {
+        this.setState({ sortFlag: e.target.checked }, this.processList);
+    },
+
+    filterStrChanged: function (e) {
+        this.setState({ filterText: e.target.value }, this.processList);
+    },
+
+    clearSettings: function () {
+        this.setState({ sortFlag: false, filterText: "" }, this.processList)
+    },
+
+    processList: function () {
+        let strArr = [...this.props.initArray];
+        if (this.state.filterText) strArr = strArr.filter(el => el.includes(this.state.filterText));
+        if (this.state.sortFlag) strArr.sort();
+        this.setState({ finalArray: strArr });
     },
 
     render: function () {
         const filterBlock = React.DOM.div({ className: "filterControls" },
             React.DOM.label({ className: 'FilterCheckbox' },
                 React.DOM.span(null, 'Sort'),
-                React.DOM.input({ type: 'checkbox', name: 'sortingCheckbox', checked: this.state.markCheckbox, onClick: this.filterSettings })
+                React.DOM.input({ type: 'checkbox', name: 'sortingCheckbox', checked: this.state.sortFlag, onChange: this.sortFlagChanged })
             ),
             React.DOM.label({ className: 'FilterText' },
                 React.DOM.span(null, 'Filter By:'),
-                React.DOM.input({ type: 'text', name: 'filterText', value: this.state.filterText, onChange: this.filterSettings })
+                React.DOM.input({ type: 'text', name: 'filterText', value: this.state.filterText, onChange: this.filterStrChanged })
             ),
-            React.DOM.input({ type: 'button', name: 'clearSorting', className: 'FilterClear', value: 'Clear', onClick: this.filterSettings })
+            React.DOM.input({ type: 'button', name: 'clearSorting', className: 'FilterClear', value: 'Clear', onClick: this.clearSettings })
         );
 
-        const stringsBlockCode = this.state.currentArray.map((el, ind) => {
-            return React.DOM.div({ key: ind, className: 'FilterString' }, el
-            )
+        const stringsBlockCode = this.state.finalArray.map((el, ind) => {
+            return React.DOM.div({ key: ind, className: 'FilterString' }, el)
         });
         return React.DOM.div(null, filterBlock, React.DOM.div({ className: "FilterStringsBlock" }, stringsBlockCode));
-    },
+    }
 });

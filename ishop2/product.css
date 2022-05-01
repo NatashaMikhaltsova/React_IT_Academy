@@ -1,4 +1,4 @@
-.GoodsTableCell {
+.productCell {
     height: 110px;
     border: 1px solid black;
     display: grid;
@@ -6,10 +6,10 @@
     justify-content: space-around;
 }
 
-.GoodsTableImg img {
+.productImg img {
     height: 100px;
 }
 
-.GoodsTableSelected {
+.productSelected {
     background-color: yellow;
 }

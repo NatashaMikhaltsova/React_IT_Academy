@@ -15,7 +15,7 @@ const Shop = React.createClass({
             count: React.PropTypes.string.isRequired,
             control: React.PropTypes.string.isRequired,
         }),
-        initGoods: React.PropTypes.arrayOf(
+        initProducts: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 id: React.PropTypes.number.isRequired,
                 title: React.PropTypes.string.isRequired,
@@ -29,7 +29,7 @@ const Shop = React.createClass({
     getInitialState: function () {
         return {
             clickedRowKey: null,
-            goods: this.props.initGoods,
+            products: this.props.initProducts,
         }
     },
 
@@ -45,8 +45,8 @@ const Shop = React.createClass({
         let deletionConfirmed = confirm(`Вы действительно хотите ударить ${rowNum} строку?`);
         if (deletionConfirmed) {
             this.setState(prevState => {
-                prevState.goods.splice(rowNum - 1, 1);
-                return { goods: prevState.goods, clickedRowKey: prevState.clickedRowKey }
+                prevState.products.splice(rowNum - 1, 1);
+                return { products: prevState.products, clickedRowKey: prevState.clickedRowKey }
             });
         };
     },
@@ -54,16 +54,16 @@ const Shop = React.createClass({
     render: function () {
         const welcomeCode = React.DOM.div({ className: "ShopWelcome" }, this.props.welcome);
         const tableHeaderCode = React.DOM.div({ key: this.props.tableHeader.id, className: 'ShopRow' },
-            React.DOM.div({ className: "GoodsTableCell ShopHeaderCell" }, this.props.tableHeader.id),
-            React.DOM.div({ className: "GoodsTableCell ShopHeaderCell" }, this.props.tableHeader.title),
-            React.DOM.div({ className: "GoodsTableCell ShopHeaderCell" }, this.props.tableHeader.price),
-            React.DOM.div({ className: "GoodsTableCell ShopHeaderCell" }, this.props.tableHeader.url),
-            React.DOM.div({ className: "GoodsTableCell ShopHeaderCell" }, this.props.tableHeader.count),
-            React.DOM.div({ className: "GoodsTableCell ShopHeaderCell" }, this.props.tableHeader.control),
+            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.id),
+            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.title),
+            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.price),
+            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.url),
+            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.count),
+            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.control),
         );
 
-        const goodsCode = this.state.goods.map((el, ind) =>
-            React.createElement(GoodsTable, {
+        const productCode = this.state.products.map((el, ind) =>
+            React.createElement(Product, {
                 key: el.id,
                 id: el.id,
                 row: ind + 1,
@@ -77,7 +77,6 @@ const Shop = React.createClass({
             })
         );
 
-
-        return React.DOM.div(null, welcomeCode, React.DOM.div({ className: "ShopFrame" }, tableHeaderCode, goodsCode));
+        return React.DOM.div(null, welcomeCode, React.DOM.div({ className: "ShopFrame" }, tableHeaderCode, productCode));
     },
 });

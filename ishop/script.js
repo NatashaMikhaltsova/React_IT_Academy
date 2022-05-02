@@ -6,7 +6,7 @@ const tableHeaders = {
     url: 'Фото',
     count: 'Количество'
 };
-const productData = [
+const goodsData = [
     { id: 1, title: "Ошейник", price: 16.50, url: "https://img.joomcdn.net/d6a27399e764b6c95f95642d78d7efb1947ff045_original.jpeg", count: 5 },
     { id: 2, title: "Когтеточка", price: 100, url: "https://vetapteki.by/wp-content/uploads/prod/2021/08/G000104961_0.jpg", count: 2 },
     { id: 3, title: "Клетка для попугая", price: 253.99, url: "https://garfield.by/upload/iblock/33e/11aa5y4tpb4cprapouzr2tli0hmix9vj/a44cbbaf928dc09e36ac324ceff8ab6a.jpg", count: 1 },
@@ -16,6 +16,6 @@ const productData = [
 ];
 
 ReactDOM.render(
-    React.createElement(productTable, { welcome: welcomeString, tableHeader: tableHeaders, product: productData }),
+    React.createElement(GoodsTable, { welcome: welcomeString, tableHeader: tableHeaders, goods: goodsData }),
     document.getElementById('table')
 );

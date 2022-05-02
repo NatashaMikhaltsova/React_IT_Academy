@@ -1,15 +1,15 @@
-.productTableFrame {
+.GoodsTableFrame {
     display: grid;
     justify-content: center;
 }
 
-.productTableRow {
+.GoodsTableRow {
     width: 100vh;
     display: grid;
     grid-template-columns: 10% 20% 20% 30% 20%;
 }
 
-.productCell {
+.GoodsTableCell {
     height: 110px;
     border: 1px solid black;
     display: grid;
@@ -17,16 +17,16 @@
     justify-content: space-around;
 }
 
-.productTableHeaderCell {
+.GoodsTableHeaderCell {
     height: 40px;
     font-weight: bold;
 }
 
-.productImg img {
+.GoodsTableImg img {
     height: 100px;
 }
 
-.productTableWelcome {
+.GoodsTableWelcome {
     text-align: center;
     font-weight: bold;
     word-spacing: 0.3em;

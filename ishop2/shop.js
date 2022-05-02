@@ -34,7 +34,7 @@ const Shop = React.createClass({
     },
 
     clickedRow: function (id) {
-        this.setState({ clickedRowKey: id});
+        this.setState({ clickedRowKey: id });
     },
 
     isRowClicked: function (rowCode) {
@@ -45,8 +45,7 @@ const Shop = React.createClass({
         let deletionConfirmed = confirm(`Вы действительно хотите ударить ${rowNum} строку?`);
         if (deletionConfirmed) {
             this.setState(prevState => {
-                prevState.products.splice(rowNum - 1, 1);
-                return { products: prevState.products, clickedRowKey: prevState.clickedRowKey }
+                return { products: prevState.products.filter((el, ind) => ind !== rowNum - 1) }
             });
         };
     },
@@ -71,9 +70,9 @@ const Shop = React.createClass({
                 price: el.price,
                 url: el.url,
                 count: el.count,
-                cbClickedRow: this.clickedRow,
+                cbSelectRow: this.clickedRow,
                 isSelected: this.isRowClicked(el.id),
-                cbDeletedRow: this.deleteRow,
+                cbDeleteRow: this.deleteRow,
             })
         );
 

@@ -8,17 +8,18 @@ const Product = React.createClass({
         price: React.PropTypes.number.isRequired,
         url: React.PropTypes.string.isRequired,
         count: React.PropTypes.number.isRequired,
-        cbClickedRow: React.PropTypes.func.isRequired,
+        cbSelectRow: React.PropTypes.func.isRequired,
         isSelected: React.PropTypes.bool.isRequired,
-        cbDeletedRow: React.PropTypes.func.isRequired,
+        cbDeleteRow: React.PropTypes.func.isRequired,
     },
 
-    rowClicked: function (e) {
-        if (e.target.name !== 'productDelete') this.props.cbClickedRow(this.props.id);
+    rowClicked: function (e) {    
+        if (this.props.cbSelectRow) this.props.cbSelectRow(this.props.id);
     },
 
-    deleteClickedRow: function () {
-        this.props.cbDeletedRow(this.props.row);
+    deleteClickedRow: function (e) {
+        e.stopPropagation();
+        if (this.props.cbDeleteRow) this.props.cbDeleteRow(this.props.row);
     },
 
     render: function () {

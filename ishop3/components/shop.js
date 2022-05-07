@@ -1,88 +1,87 @@
-const React = require('react');
-const Product = require('./product');
-require('./shop.css');
-require('./product.css');
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Shop = React.createClass({
-    displayName: 'Shop',
+import Product from './product';
+import './shop.css';
 
-    getDefaultProps: function () {
-        return { welcome: 'Добро пожаловать в наш интернет-магазин' };
-    },
 
-    propTypes: {
-        welcome: React.PropTypes.string,
-        tableHeader: React.PropTypes.shape({
-            id: React.PropTypes.string.isRequired,
-            title: React.PropTypes.string.isRequired,
-            price: React.PropTypes.string.isRequired,
-            url: React.PropTypes.string.isRequired,
-            count: React.PropTypes.string.isRequired,
-            control: React.PropTypes.string.isRequired,
+class Shop extends React.Component {
+
+    static propTypes = {
+        welcome: PropTypes.string.isRequired,
+        tableHeader: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            price: PropTypes.string.isRequired,
+            url: PropTypes.string.isRequired,
+            count: PropTypes.string.isRequired,
+            control: PropTypes.string.isRequired,
         }),
-        initProducts: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                id: React.PropTypes.number.isRequired,
-                title: React.PropTypes.string.isRequired,
-                price: React.PropTypes.number.isRequired,
-                url: React.PropTypes.string.isRequired,
-                count: React.PropTypes.number.isRequired,
+        initProducts: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                title: PropTypes.string.isRequired,
+                price: PropTypes.number.isRequired,
+                url: PropTypes.string.isRequired,
+                count: PropTypes.number.isRequired,
             })
         ),
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            clickedRowKey: null,
-            products: this.props.initProducts,
-        }
-    },
+    state = {
+        clickedRowKey: null,
+        products: this.props.initProducts,
+    };
 
-    clickedRow: function (id) {
+    clickedRow = (id) => {
         this.setState({ clickedRowKey: id });
-    },
+    };
 
-    isRowClicked: function (rowCode) {
+    isRowClicked = (rowCode) => {
         return this.state.clickedRowKey === rowCode;
-    },
+    };
 
-    deleteRow: function (rowNum) {
+    deleteRow = (rowNum) => {
         let deletionConfirmed = confirm(`Вы действительно хотите ударить ${rowNum} строку?`);
-        if (deletionConfirmed) {
-            this.setState(prevState => {
-                return { products: prevState.products.filter((el, ind) => ind !== rowNum - 1) }
-            });
-        };
-    },
+        if (deletionConfirmed) this.setState(prevState => ({ products: prevState.products.filter((el, ind) => ind !== rowNum - 1) }));
+    };
 
-    render: function () {
-        const welcomeCode = React.DOM.div({ className: "ShopWelcome" }, this.props.welcome);
-        const tableHeaderCode = React.DOM.div({ key: this.props.tableHeader.id, className: 'ShopRow' },
-            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.id),
-            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.title),
-            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.price),
-            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.url),
-            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.count),
-            React.DOM.div({ className: "productCell ShopHeaderCell" }, this.props.tableHeader.control),
-        );
+    render() {
+        const tableHeaderCode =
+            <div key={this.props.tableHeader.id} className='ShopRow'>
+                <div className='productCell ShopHeaderCell'>{this.props.tableHeader.id}</div>
+                <div className='productCell ShopHeaderCell'>{this.props.tableHeader.title}</div>
+                <div className='productCell ShopHeaderCell'>{this.props.tableHeader.price}</div>
+                <div className='productCell ShopHeaderCell'>{this.props.tableHeader.url}</div>
+                <div className='productCell ShopHeaderCell'>{this.props.tableHeader.count}</div>
+                <div className='productCell ShopHeaderCell'>{this.props.tableHeader.control}</div>
+            </div>;
 
         const productCode = this.state.products.map((el, ind) =>
-            React.createElement(Product, {
-                key: el.id,
-                id: el.id,
-                row: ind + 1,
-                title: el.title,
-                price: el.price,
-                url: el.url,
-                count: el.count,
-                cbSelectRow: this.clickedRow,
-                isSelected: this.isRowClicked(el.id),
-                cbDeleteRow: this.deleteRow,
-            })
+            <Product key={el.id}
+                id={el.id}
+                row={ind + 1}
+                title={el.title}
+                price={el.price}
+                url={el.url}
+                count={el.count}
+                cbSelectRow={this.clickedRow}
+                isSelected={this.isRowClicked(el.id)}
+                cbDeleteRow={this.deleteRow} />
         );
 
-        return React.DOM.div(null, welcomeCode, React.DOM.div({ className: "ShopFrame" }, tableHeaderCode, productCode));
-    },
-});
+        return (
+            <React.Fragment>
+                <div className='ShopWelcome'>
+                    {this.props.welcome}
+                </div>
+                <div className='ShopFrame'>
+                    {tableHeaderCode}
+                    {productCode}
+                </div>
+            </React.Fragment>
+        )
+    }
+};
 
-module.exports = Shop;
+export default Shop;

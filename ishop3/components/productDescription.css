@@ -1,0 +1,14 @@
+.ProductDescriprionBlock {
+    position: absolute;
+    top: 700px;
+    font-size: 18px;
+}
+
+.ProductDescriprionBlock  h1{
+    margin: 15px 0px;
+    font-size: 30px;
+}
+
+.productDescriprionInvalid{
+    color: red;
+}

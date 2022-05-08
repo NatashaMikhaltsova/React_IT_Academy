@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './product.css';
 
-class Product extends React.Component {
+export class Product extends React.Component {
     static propTypes = {
         id: PropTypes.number.isRequired,
         row: PropTypes.number.isRequired,
@@ -14,15 +14,22 @@ class Product extends React.Component {
         cbSelectRow: PropTypes.func.isRequired,
         isSelected: PropTypes.bool.isRequired,
         cbDeleteRow: PropTypes.func.isRequired,
+        cbEditRow: PropTypes.func.isRequired,
+        isDisabled: PropTypes.bool.isRequired,
     };
 
-    rowClicked = (e) => {
-        if (this.props.cbSelectRow) this.props.cbSelectRow(this.props.id);
+    rowClicked = () => {
+        if (this.props.cbSelectRow) this.props.cbSelectRow({ id: this.props.id, row: this.props.row, title: this.props.title, price: this.props.price, url: this.props.url, count: this.props.count });
     };
 
     deleteClickedRow = (e) => {
         e.stopPropagation();
-        if (this.props.cbDeleteRow) this.props.cbDeleteRow(this.props.row);
+        if (this.props.cbDeleteRow) this.props.cbDeleteRow(this.props.row, this.props.id);
+    };
+
+    editRow = (e) => {
+        e.stopPropagation();
+        if (this.props.cbEditRow) this.props.cbEditRow({ id: this.props.id, row: this.props.row, title: this.props.title, price: this.props.price, url: this.props.url, count: this.props.count });
     };
 
     render() {
@@ -33,10 +40,9 @@ class Product extends React.Component {
                 <div className='productPrice productCell'>{this.props.price}</div>
                 <div className='productImg productCell'><img src={this.props.url} /></div>
                 <div className='productCount productCell'>{this.props.count}</div>
-                <div className='productCell'><input type='button' name='productDelete' className='productDelete' value='Delete' onClick={this.deleteClickedRow} /></div>
+                <div className={`${this.props.isDisabled ? `buttonDisabled ` : ``}productCell`}><input type='button' name='productDelete' className='productDelete' value='Delete' onClick={this.deleteClickedRow} /></div>
+                <div className={`${this.props.isDisabled ? `buttonDisabled ` : ``}productCell`}><input type='button' name='productEdit' className='productEdit' value='Edit' onClick={this.editRow} /></div>
             </div>
         )
     };
 };
-
-export default Product;

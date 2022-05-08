@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Product from './product';
+import { Product } from './product';
+import { ProductDescription } from './productDescription';
 import './shop.css';
 
 
-class Shop extends React.Component {
+export class Shop extends React.Component {
 
     static propTypes = {
         welcome: PropTypes.string.isRequired,
@@ -29,26 +30,44 @@ class Shop extends React.Component {
     };
 
     state = {
-        clickedRowKey: null,
         products: this.props.initProducts,
+        productDescriptionMode: null,
+        selectedProduct: {
+            id: null,
+            row: null,
+            title: null,
+            price: null,
+            url: null,
+            count: null,
+        },
+        
     };
 
-    clickedRow = (id) => {
-        this.setState({ clickedRowKey: id });
+    clickedRow = (obj) => {
+        this.setState({ selectedProduct: obj, productDescriptionMode: 'view'});
     };
 
     isRowClicked = (rowCode) => {
-        return this.state.clickedRowKey === rowCode;
+        return this.state.selectedProduct.id === rowCode;
     };
 
-    deleteRow = (rowNum) => {
+    deleteRow = (rowNum, id) => {
         let deletionConfirmed = confirm(`Вы действительно хотите ударить ${rowNum} строку?`);
         if (deletionConfirmed) this.setState(prevState => ({ products: prevState.products.filter((el, ind) => ind !== rowNum - 1) }));
+        if (this.state.selectedProduct && this.state.selectedProduct.id === id) this.setState({ selectedProduct: { id: null, row: null, title: null, price: null, url: null, count: null }, productDescriptionMode: null});
     };
+
+    editedRow = (obj) => {
+        this.setState({ selectedProduct: obj, productDescriptionMode: 'edit' });
+    };
+
+    editProductDescription = (obj) => {
+        this.setState(prevState => ({ products: prevState.products.map(el => (el.id === obj.id) ? el = obj : el) }));
+    }
 
     render() {
         const tableHeaderCode =
-            <div key={this.props.tableHeader.id} className='ShopRow'>
+            <div key={this.props.tableHeader.id} className='ShopRow shopHeaderRow'>
                 <div className='productCell ShopHeaderCell'>{this.props.tableHeader.id}</div>
                 <div className='productCell ShopHeaderCell'>{this.props.tableHeader.title}</div>
                 <div className='productCell ShopHeaderCell'>{this.props.tableHeader.price}</div>
@@ -67,8 +86,22 @@ class Shop extends React.Component {
                 count={el.count}
                 cbSelectRow={this.clickedRow}
                 isSelected={this.isRowClicked(el.id)}
-                cbDeleteRow={this.deleteRow} />
+                cbDeleteRow={this.deleteRow}
+                cbEditRow={this.editedRow}
+                isDisabled={false} />
         );
+
+        const productDescriptionCode =
+            <ProductDescription key={this.state.selectedProduct.id}
+                id={this.state.selectedProduct.id}
+                row={this.state.selectedProduct.row}
+                title={this.state.selectedProduct.title}
+                price={this.state.selectedProduct.price}
+                url={this.state.selectedProduct.url}
+                count={this.state.selectedProduct.count}
+                mode={this.state.productDescriptionMode} 
+                cbSaveProduct={this.editProductDescription}
+                />;
 
         return (
             <React.Fragment>
@@ -79,9 +112,8 @@ class Shop extends React.Component {
                     {tableHeaderCode}
                     {productCode}
                 </div>
+                {productDescriptionCode}
             </React.Fragment>
         )
     }
 };
-
-export default Shop;

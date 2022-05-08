@@ -1,12 +1,18 @@
 .ShopFrame {
     display: grid;
     justify-content: center;
+    max-height: 600px;
+    overflow: auto;
 }
 
 .ShopRow {
     width: 100vh;
     display: grid;
-    grid-template-columns: 7% 17% 17% 27% 17% 15%;
+    grid-template-columns: 7% 17% 17% 22% 17% 10% 10%;
+}
+
+.shopHeaderRow {
+    grid-template-columns: 7% 17% 17% 22% 17% 20%
 }
 
 .ShopHeaderCell {

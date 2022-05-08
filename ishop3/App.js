@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Shop from './components/shop';
+import { Shop } from './components/shop'
 import './components/style.css';
 
 const welcomeString = 'Добро пожаловать в наш зоомагазин!';

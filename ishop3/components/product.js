@@ -15,7 +15,8 @@ export class Product extends React.Component {
         isSelected: PropTypes.bool.isRequired,
         cbDeleteRow: PropTypes.func.isRequired,
         cbEditRow: PropTypes.func.isRequired,
-        isDisabled: PropTypes.bool.isRequired,
+        isFullyDisabled: PropTypes.bool.isRequired,
+        isDeleteDisabled: PropTypes.bool.isRequired
     };
 
     rowClicked = () => {
@@ -40,8 +41,8 @@ export class Product extends React.Component {
                 <div className='productPrice productCell'>{this.props.price}</div>
                 <div className='productImg productCell'><img src={this.props.url} /></div>
                 <div className='productCount productCell'>{this.props.count}</div>
-                <div className={`${this.props.isDisabled ? `buttonDisabled ` : ``}productCell`}><input type='button' name='productDelete' className='productDelete' value='Delete' onClick={this.deleteClickedRow} /></div>
-                <div className={`${this.props.isDisabled ? `buttonDisabled ` : ``}productCell`}><input type='button' name='productEdit' className='productEdit' value='Edit' onClick={this.editRow} /></div>
+                <div className='productCell'><input type='button' className={`${this.props.isFullyDisabled ? `buttonDisabled` : ``}`} name='productEdit' value='Редактировать' onClick={this.editRow} /></div>
+                <div className='productCell'><input type='button' className={`${this.props.isFullyDisabled ? `buttonDisabled` : ``}${this.props.isDeleteDisabled ? `disabled buttonDisabled` : ``}`} name='productDelete' value='Удалить' onClick={this.deleteClickedRow} /></div>
             </div>
         )
     };

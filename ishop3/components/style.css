@@ -3,6 +3,10 @@ body {
     margin: 0;
 }
 
-.buttonDisabled {
+.disable {
     pointer-events: none;
+}
+
+.buttonDisabled {
+    color: #666666;
 }

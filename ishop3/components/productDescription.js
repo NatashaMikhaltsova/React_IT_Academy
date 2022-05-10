@@ -14,6 +14,8 @@ export class ProductDescription extends React.Component {
         mode: PropTypes.string,
         cbAddProduct: PropTypes.func,
         cbSaveProduct: PropTypes.func,
+        cbCancelEditingProduct: PropTypes.func,
+        cbDisableProductRow: PropTypes.func,
     };
 
     state = {
@@ -25,65 +27,78 @@ export class ProductDescription extends React.Component {
             url: this.props.url,
             count: this.props.count,
         },
+        errors: {},
+        formIsValid: true,
     };
 
     handleChanges = (e) => {
-        let fields = {...this.state.productProperties};
+        let fields = { ...this.state.productProperties };
         fields[e.target.id] = e.target.value;
-        this.setState({ productProperties: fields });
+        this.setState({ productProperties: fields }, this.fieldsValidation);
+        if (this.props.cbDisableProductRow) this.props.cbDisableProductRow();
     }
 
-    checkTitleValid = () => {
-        if (this.state.productProperties.title.trim() === '') {
-            return <span className='productDescriprionInvalid'>{'Введите название товара'}</span>
+    fieldsValidation = () => {
+        let fields = this.state.productProperties;
+        const validUrl = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+        let errors = {};
+        let formIsValid = true;
+        if (!fields.title) {
+            formIsValid = false;
+            errors.title = "Введите название товара";
         }
-    };
-
-    checkPriceValid = () => {
-        if (this.state.productProperties.price == '') {
-            return <span className='productDescriprionInvalid'>{'Введите цену товара'}</span>
-        } else if (isNaN(this.state.productProperties.price)) {
-            return <span className='productDescriprionInvalid'>{'Введенное значение должно быть числом'}</span>
+        if (!fields.price) {
+            formIsValid = false;
+            errors.price = "Введите цену товара";
         }
-    };
-
-    checkUrlValid = () => {
-        let findUrl = this.state.productProperties.url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-        if (this.state.productProperties.url.trim() === '') {
-            return <span className='productDescriprionInvalid'>{'Введите url для товара'}</span>
-        } else if (findUrl === null) {
-            return <span className='productDescriprionInvalid'>{'Введенное значение должно быть корректной ссылкой'}</span>
+        if (!fields.url) {
+            formIsValid = false;
+            errors.url = "Введите url для товара";
         }
-    };
-
-    checkCountValid = () => {
-        if (this.state.productProperties.count == '') {
-            return <span className='productDescriprionInvalid'>{'Введите количество товара'}</span>
-        } else if (!(Number.isInteger(+this.state.productProperties.count))) {
-            return <span className='productDescriprionInvalid'>{'Введенное значение должно быть целым числом'}</span>
+        if (fields.url.match(validUrl) === null) {
+            formIsValid = false;
+            errors.incorrectUrl = "Введенное значение должно быть корректной ссылкой";
         }
-    };
+        if (!fields.count) {
+            formIsValid = false;
+            errors.count = "Введите количество товара";
+        }
+        if (!(Number.isInteger(+this.state.productProperties.count))) {
+            formIsValid = false;
+            errors.integer_count = "Введенное значение должно быть целым числом";
+        }
+        this.setState({ formIsValid: formIsValid, errors: errors });
+    }
 
     saveProductDescription = () => {
-        if(this.props.cbSaveProduct) this.props.cbSaveProduct(this.state.productProperties);
+        this.state.formIsValid && this.setState(prevState => ({ productProperties: { ...prevState.productProperties, price: +prevState.productProperties.price, count: +prevState.productProperties.count } }), this.updateSaveProps);
+    };
+
+    updateSaveProps = () => {
+        if (this.props.cbSaveProduct) this.props.cbSaveProduct(this.state.productProperties);
+    }
+
+    cancelProductDescription = () => {
+        this.setState({ productProperties: { id: this.props.id, row: this.props.row, title: this.props.title, price: this.props.price, url: this.props.url, count: this.props.count } });
+        if (this.props.cbCancelEditingProduct) this.props.cbCancelEditingProduct();
     }
 
     render() {
         if (this.props.mode === 'view') {
             return (
                 <div className="ProductDescriprionBlock">
-                    <h1>{this.props.title}</h1>
+                    <h1>{this.state.productProperties.title}</h1>
                     <div>
                         <span>Цена: </span>
-                        <span>{this.props.price}</span>
+                        <span>{this.state.productProperties.price}</span>
                     </div>
                     <div>
                         <span>Ссылка на фото: </span>
-                        <span>{this.props.url}</span>
+                        <span>{this.state.productProperties.url}</span>
                     </div>
                     <div>
                         <span>Количество: </span>
-                        <span>{this.props.count}</span>
+                        <span>{this.state.productProperties.count}</span>
                     </div>
                 </div>
             )
@@ -99,25 +114,28 @@ export class ProductDescription extends React.Component {
                     <div>
                         <label htmlFor="title">Название: </label>
                         <input type="text" id="title" name="title" value={this.state.productProperties.title} onChange={this.handleChanges} />
-                        {this.checkTitleValid()}
+                        {this.state.errors.title && <span className='productDescriprionInvalid'>{this.state.errors.title}</span>}
                     </div>
                     <div>
                         <label htmlFor="price">Цена: </label>
-                        <input type="text" id="price" name="price" value={this.state.productProperties.price} onChange={this.handleChanges}/>
-                        {this.checkPriceValid()}
+                        <input type="number" id="price" name="price" value={this.state.productProperties.price} onChange={this.handleChanges} />
+                        {this.state.errors.price && <span className='productDescriprionInvalid'>{this.state.errors.price}</span>}
                     </div>
                     <div>
                         <label htmlFor="url">Ссылка на фото: </label>
-                        <input type="text" id="url" name="url" value={this.state.productProperties.url} onChange={this.handleChanges}/>
-                        {this.checkUrlValid()}
+                        <input type="text" id="url" name="url" value={this.state.productProperties.url} onChange={this.handleChanges} />
+                        {this.state.errors.url && <span className='productDescriprionInvalid'>{this.state.errors.url}</span>}
+                        {this.state.errors.incorrectUrl && <span className='productDescriprionInvalid'>{this.state.errors.incorrectUrl}</span>}
                     </div>
                     <div>
                         <label htmlFor="count">Количество: </label>
-                        <input type="text" id="count" name="count" value={this.state.productProperties.count} onChange={this.handleChanges}/>
-                        {this.checkCountValid()}
+                        <input type="number" id="count" name="count" value={this.state.productProperties.count} onChange={this.handleChanges} />
+                        {this.state.errors.count && <span className='productDescriprionInvalid'>{this.state.errors.count}</span>}
+                        {this.state.errors.integer_count && <span className='productDescriprionInvalid'>{this.state.errors.integer_count}</span>}
                     </div>
                     <div>
-                        <input type='button' name='productDescriptionSave' value='Save' onClick={this.saveProductDescription} />
+                        <input type='button' className={`${this.state.formIsValid ? `` : `disable buttonDisabled`}`} name='productDescriptionSave' value='Save' onClick={this.saveProductDescription} />
+                        <input type='button' name='productDescriptionCancel' value='Cancel' onClick={this.cancelProductDescription} />
                     </div>
                 </div>
             )

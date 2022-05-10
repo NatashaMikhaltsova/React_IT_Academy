@@ -8,11 +8,11 @@
 .ShopRow {
     width: 100vh;
     display: grid;
-    grid-template-columns: 7% 17% 17% 22% 17% 10% 10%;
+    grid-template-columns: 6% 17% 17% 22% 17% 13% 8%;
 }
 
 .shopHeaderRow {
-    grid-template-columns: 7% 17% 17% 22% 17% 20%
+    grid-template-columns: 6% 17% 17% 22% 17% 21%
 }
 
 .ShopHeaderCell {

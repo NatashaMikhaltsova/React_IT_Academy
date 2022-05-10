@@ -40,11 +40,12 @@ export class Shop extends React.Component {
             url: null,
             count: null,
         },
-        
+        disableDeleteButtons: false,
+        disableShopActions: false,
     };
 
     clickedRow = (obj) => {
-        this.setState({ selectedProduct: obj, productDescriptionMode: 'view'});
+        this.setState({ selectedProduct: obj, productDescriptionMode: 'view', disableDeleteButtons: false});
     };
 
     isRowClicked = (rowCode) => {
@@ -58,12 +59,28 @@ export class Shop extends React.Component {
     };
 
     editedRow = (obj) => {
-        this.setState({ selectedProduct: obj, productDescriptionMode: 'edit' });
+        this.setState({ selectedProduct: obj, productDescriptionMode: 'edit', disableDeleteButtons: true });
     };
 
     editProductDescription = (obj) => {
-        this.setState(prevState => ({ products: prevState.products.map(el => (el.id === obj.id) ? el = obj : el) }));
-    }
+        this.setState(prevState => ({ products: prevState.products.map(el => (el.id === obj.id) ? el = obj : el), productDescriptionMode: 'view', disableShopActions: false, disableDeleteButtons: false }));
+    };
+
+    cancelEditingProduct = () => {
+        this.setState({ productDescriptionMode: 'view', disableShopActions: false, disableDeleteButtons: false});
+    };
+
+    disableShopActions = () => {
+        this.setState({ disableShopActions: true });
+    };
+
+    isRowDisabled = () => {
+        return this.state.disableShopActions;
+    };
+
+    isDeleteDisabled = () => {
+        return this.state.disableDeleteButtons;
+    };
 
     render() {
         const tableHeaderCode =
@@ -88,7 +105,8 @@ export class Shop extends React.Component {
                 isSelected={this.isRowClicked(el.id)}
                 cbDeleteRow={this.deleteRow}
                 cbEditRow={this.editedRow}
-                isDisabled={false} />
+                isFullyDisabled={this.isRowDisabled()}
+                isDeleteDisabled={this.isDeleteDisabled()} />
         );
 
         const productDescriptionCode =
@@ -101,6 +119,8 @@ export class Shop extends React.Component {
                 count={this.state.selectedProduct.count}
                 mode={this.state.productDescriptionMode} 
                 cbSaveProduct={this.editProductDescription}
+                cbCancelEditingProduct={this.cancelEditingProduct}
+                cbDisableProductRow={this.disableShopActions}
                 />;
 
         return (
@@ -108,9 +128,12 @@ export class Shop extends React.Component {
                 <div className='ShopWelcome'>
                     {this.props.welcome}
                 </div>
-                <div className='ShopFrame'>
+                <div className={`${this.state.disableShopActions ? `disable ` : ``}ShopFrame`}>
                     {tableHeaderCode}
                     {productCode}
+                    <div>
+                        <input type='button' className={`${this.state.disableShopActions ? `buttonDisabled` : ``}`} name='addProduct' value='Добавить новый товар' /* onClick={this.editRow} */ />
+                    </div>
                 </div>
                 {productDescriptionCode}
             </React.Fragment>

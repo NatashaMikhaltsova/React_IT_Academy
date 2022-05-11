@@ -4,11 +4,21 @@
     font-size: 18px;
 }
 
-.ProductDescriprionBlock  h1{
+.ProductDescriprionBlock h1 {
     margin: 15px 0px;
     font-size: 30px;
 }
 
-.productDescriprionInvalid{
+.productDescriprionInvalid {
     color: red;
+}
+
+.productDescriprionInput {
+    position: fixed;
+    left: 150px;
+}
+
+.productDescriprionInvalid {
+    position: fixed;
+    left: 320px;
 }

@@ -28,3 +28,7 @@
     margin-top: 10px;
     margin-bottom: 50px;
 }
+
+input[name='addProduct'] {
+    margin-top: 20px;
+}

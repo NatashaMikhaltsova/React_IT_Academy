@@ -7,7 +7,6 @@ export class RainbowFrame extends React.Component {
 
     static propTypes = {
         colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-        text: PropTypes.string.isRequired,
     };
 
     render() {
@@ -17,9 +16,7 @@ export class RainbowFrame extends React.Component {
                 <div style={{ border: "solid 5px " + color, padding: "10px" }}>
                     {result}
                 </div>
-            return result
-        })
-
+        });
         return result;
     }
 };

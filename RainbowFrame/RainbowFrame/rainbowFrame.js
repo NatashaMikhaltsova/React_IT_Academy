@@ -11,7 +11,7 @@ export class RainbowFrame extends React.Component {
 
     render() {
         let result = this.props.children;
-        this.props.colors.map(color => {
+        this.props.colors.forEach(color => {
             result =
                 <div style={{ border: "solid 5px " + color, padding: "10px" }}>
                     {result}

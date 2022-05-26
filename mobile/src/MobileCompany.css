@@ -1,0 +1,24 @@
+.MobileCompany {
+    display: grid;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.MobileCompanyName {
+    padding: 2px 0;
+}
+
+.MobileCompanyTable {
+    padding: 10px 0;
+}
+
+.MobileCompanyTableHeader {
+    width: 100vh;
+    display: grid;
+    grid-template-columns: 14% 14% 14% 14% 14% 30%;
+}
+
+.MobileCompanyClientsFilter {
+    padding:  10px 0;
+    border-top: 1px solid grey;
+}

@@ -1,0 +1,15 @@
+.MobileClientInfoBlock {
+    position: absolute;
+    top: 700px;
+    font-size: 18px;
+}
+
+.MobileClientInfoBlock h1 {
+    margin: 15px 0px;
+    font-size: 30px;
+}
+
+.MobileClientInfoInput {
+    position: relative;
+    left: 10px;
+}

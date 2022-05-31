@@ -1,0 +1,53 @@
+.Content {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.TempBox {
+    text-align: center;
+}
+
+.CurrentTemp {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.TempNum {
+    font-size: 3.4rem;
+    font-weight: 300;
+    line-height: 2.7rem;
+    padding-top: 5px;
+}
+
+.Exponent {
+    font-size: 1.5rem;
+}
+
+.FeelsLike {
+    font-size: 0.7rem;
+    padding-top: 10px;
+}
+
+.AppTemp {
+    font-size: 1rem;
+}
+
+.InfoBox {
+    padding-left: 8px;
+}
+
+.Description {
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.Info {
+    padding-top: 0.5rem;
+    font-size: 0.8rem;
+}

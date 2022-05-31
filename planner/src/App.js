@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css';
+
+import Homepage from "./pages/Homepage";
+import CalendarView from "./pages/CalendarView";
+import DayView from "./pages/DayView";
+import WeekView from "./pages/WeekView";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <GlobalStyles />
+      <Switch>
+        <Route exact path="/">
+          <Homepage />
+        </Route>
+        <Route exact path="/calendar-month">
+          <CalendarView />
+        </Route>
+        <Route exact path="/date/:date">
+          <DayView />
+        </Route>
+        <Route exact path="/week/:date">
+          <WeekView />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

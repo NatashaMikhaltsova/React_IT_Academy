@@ -1,0 +1,78 @@
+.Wrapper {
+    background-color: "#ECF0F8";
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
+
+.TopBanner {
+    display: flex;
+    flex-direction: row;
+    background: gradientRoseanna;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px 0px 20px 20px;
+    align-items: center;
+}
+
+.Logo {
+    width: 80px;
+    height: 90px;
+}
+
+.Greeting {
+    margin: 10px;
+    padding: 10px 0;
+}
+
+.Welcome {
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 0px 20px 0px 20px;
+    color: #000000;
+}
+
+.MainDate {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #000000;
+    padding: 0px 20px;
+    padding-top: 0px;
+}
+
+.SectionTitle {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0 10px 0;
+    padding-bottom: 6px;
+    font-weight: 600;
+    font-family: "Varela Round", sans-serif;
+}
+
+.ActionSec {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 10px;
+    justify-content: space-between;
+}
+
+.ActionIcon {
+    width: 31%;
+    margin-bottom: 15px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.IconText {
+    font-size: 1rem;
+    font-weight: 600;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Varela Round",sans-serif;
+}

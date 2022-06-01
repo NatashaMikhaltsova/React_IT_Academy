@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { format } from "date-fns";
 import { GoCalendar } from "react-icons/go";
-import { BiCalendarWeek, BiTimer } from "react-icons/bi";
+import { BiCalendarWeek } from "react-icons/bi";
 import { MdToday } from "react-icons/md";
+import { NavLink } from 'react-router-dom';
 
-import plannerLogo from "./planner_logo.png";
-import NewEventButton from "../Components/NewEventButton";
-import Weather from "../Components/Weather";
-import NewsFeed from "../Components/NewsFeed";
+import plannerLogo from "../images/planner_logo.png";
+import NewEventButton from "../components/NewEventButton";
+import Weather from "../components/Weather";
+import NewsFeed from "../components/NewsFeed";
 import './Homepage.css';
 
 const Homepage = () => {
@@ -23,42 +24,33 @@ const Homepage = () => {
     }
 
     return (
-        <Router>
-            <div className="Wrapper">
-                <div className="TopBanner">
-                    <div className="Logo"><image src={plannerLogo} /></div>
-                    <div className="Greeting">
-                        <div className="Welcome">{greeting}</div>
-                        <div className="MainDate">It's {format(today, "EEEE, LLLL do").toLowerCase()}.</div>
-                    </div>
+        <div className="HomepageWrapper">
+            <div className="HomepageTopBanner">
+                <img src={plannerLogo} alt="planner logo" />
+                <div className="HomepageGreeting">
+                    <div className="HomepageWelcome">{greeting}</div>
+                    <div className="HomepageMainDate">It's {format(today, "EEEE, LLLL do").toLowerCase()}.</div>
                 </div>
-                <div className="SectionTitle">Explore your planner</div>
-                <div className="ActionSec">
-                    <NavLink to={`/date/${format(today, "y-MM-dd")}`}>
-                        <div className="ActionIcon">
-                            <MdToday size="40" color={`${COLORS.icon1}`} />
-                            <span className="IconText">Today</span>
-                        </div>
-                    </NavLink>
-                    <NavLink to={`/week/${format(today, "y-MM-dd")}`}>
-                        <div className="ActionIcon">
-                            <BiCalendarWeek size="40" color={`${COLORS.icon1}`} />
-                            <span className="IconText">Week</span>
-                        </div>
-                    </NavLink>
-                    <NavLink to="/calendar-month">
-                        <div className="ActionIcon">
-                            <GoCalendar size="40" color={`${COLORS.icon1}`} />
-                            <span className="IconText">Month</span>
-                        </div>
-                    </NavLink>
-                </div>
-                <Weather />
-                <NewsFeed today={today} />
-                <NewEventButton />
             </div>
-        </Router>
-
+            <div className="HomepageSectionTitle">Explore your planner</div>
+            <div className="HomepageActionSec">
+                <NavLink to={`/date/${format(today, "y-MM-dd")}`} className="HomepageActionIcon">
+                    <MdToday size="40" color={"#787ab8"} />
+                    <span className="HomepageIconText">Today</span>
+                </NavLink>
+                <NavLink to={`/week/${format(today, "y-MM-dd")}`} className="HomepageActionIcon">
+                    <BiCalendarWeek size="40" color={"#787ab8"} />
+                    <span className="HomepageIconText">Week</span>
+                </NavLink>
+                <NavLink to="/calendar-month" className="HomepageActionIcon">
+                    <GoCalendar size="40" color={"#787ab8"} />
+                    <span className="HomepageIconText">Month</span>
+                </NavLink>
+            </div>
+            <Weather />
+            <NewsFeed today={today} />
+            <NewEventButton />
+        </div>
     );
 };
 

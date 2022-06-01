@@ -7,6 +7,7 @@ const Weather = () => {
     const [weather, setWeather] = useState(null);
 
     useEffect(() => {
+        let isSubscribed = true;
         // declare the async data fetching function
         const fetchData = async () => {
             // get the response from the api
@@ -18,7 +19,7 @@ const Weather = () => {
                 },
             });
             // convert the data to json
-            const data = await response.json();
+            const data = (await response.json()).data[0];
             // setWeather with the result if `isSubscribed` is true
             if (isSubscribed) {
                 setWeather(data);

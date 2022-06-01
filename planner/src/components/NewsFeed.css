@@ -1,0 +1,48 @@
+.NewsFeedWrapper {
+    margin: 10px;
+    display: flex;
+    overflow: auto;
+    width: 95%;
+}
+
+.NewsFeedArticleBox {
+    background-color: rgb(187,222,215);
+    min-width: 160px;
+    min-height: 160px;
+    margin-right: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.NewsFeedAnchorBox {
+    text-decoration: none;
+}
+
+.NewsFeedTitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: "Varela Round",
+        sans-serif;
+    overflow: hidden;
+}
+
+.NewsFeedSource {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding-bottom: 18px;
+    padding-top: 5px;
+    color: grey;
+}
+
+.NewsFeedDate {
+    font-size: 0.9rem;
+    color: grey;
+    position: absolute;
+    bottom: 10px;
+    width: 90%;
+    text-align: right;
+}

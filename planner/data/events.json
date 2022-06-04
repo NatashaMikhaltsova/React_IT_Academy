@@ -1,0 +1,10 @@
+{
+  "events": [
+    {
+      "id": 0,
+      "title": "First task",
+      "description": "description",
+      "date": "Fri Jun 24 2022"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 
 import Homepage from "./pages/Homepage";
-// import CalendarView from "./pages/CalendarView";
+import CalendarView from "./pages/CalendarView";
 import DayView from "./pages/DayView";
 // import WeekView from "./pages/WeekView";
 
@@ -13,9 +13,7 @@ function App() {
 			<React.Fragment>
 				<Routes>
 					<Route path="/" element={<Homepage />} />
-					{/* <Route exact path="/calendar-month">
-          <CalendarView />
-        </Route> */}
+					<Route path="/calendar-month" element={<CalendarView />} />
 					<Route path="/date/:date" element={<DayView />} />
 					{/* <Route exact path="/week/:date">
           <WeekView />

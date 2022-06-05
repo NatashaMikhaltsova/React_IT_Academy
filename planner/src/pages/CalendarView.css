@@ -1,0 +1,99 @@
+.CalendarViewWrapper {
+    min-height: 100%;
+    background-color: #ECF0F8;
+}
+
+.CalendarViewNavIcon {
+    padding: 0 5px;
+    color: rgb(222, 87, 102);
+    border: 1px solid rgb(222, 87, 102);
+    border-radius: 4px;
+    margin: 0 3px;
+}
+
+.CalendarViewTabs {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2px;
+    margin-right: 3px;
+}
+
+.CalendarViewTabItem {
+    flex-grow: 1;
+    text-align: center;
+    background-color: rgb(150, 184, 252);
+    border: 1px solid #cedefd;
+    color: white;
+    text-transform: uppercase;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: none;
+    padding: 6px 0;
+    font-size: 1.2rem;
+}
+
+.CalendarViewNoEventsSection {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CalendarViewAddEventImg {
+    max-width: 90vw;
+}
+
+.CalendarViewEventBox {
+    display: flex;
+    border: none;
+    animation: slideUpAnimation 0.3s;
+}
+
+@keyframes slideUpAnimation {
+    from {
+        margin-top: 100%;
+        opacity: 0;
+    }
+
+    to {
+        margin-top: 0%;
+        opacity: 0.4;
+    }
+}
+
+.CalendarViewDateBox {
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+.CalendarViewdayName {
+    color: #FFFFFF;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.CalendarViewdayNum {
+    color: #FFFFFF;
+}
+
+.CalendarViewDayEventsBox {
+    background-color: #ECF0F8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid #dae2f1;
+}
+
+.CalendarViewEventTitle {
+    padding-left: 15px;
+    font-size: 1.4rem;
+}

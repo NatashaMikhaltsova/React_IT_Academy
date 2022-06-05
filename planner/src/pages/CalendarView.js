@@ -55,7 +55,6 @@ const CalendarView = () => {
             // convert the data to json
             let data = await response.json();
             let filteredMonthData = data.filter(el => monthNames[currentMonth] === el.date.match(/ \w+? /g)[0].trim());
-            console.log((filteredMonthData))
             setMonthEvents(getSortedMonthEvents(filteredMonthData));
             setStatus("idle");
         }

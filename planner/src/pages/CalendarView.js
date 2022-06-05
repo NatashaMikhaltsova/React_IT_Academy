@@ -39,7 +39,6 @@ const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep
 
 const CalendarView = () => {
     const today = new Date();
-    let monthString = format(today, "MMM");
     const [status, setStatus] = useState("loading");
     const [currentMonth, setCurrentMonth] = useState(today.getMonth());
     const [monthEvents, setMonthEvents] = useState([]);

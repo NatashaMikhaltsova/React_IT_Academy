@@ -1,6 +1,6 @@
 import React from "react";
 
-// import DeleteEventDialog from "../Components/DeleteEventDialog";
+import DeleteEventDialog from "../components/DeleteEventDialog";
 // import EditEventDialog from "../Components/EditEventDialog";
 import './DayEventView.css';
 
@@ -25,10 +25,7 @@ const DayEventView = ({ dayEvent, refreshEvents }) => {
                                                 /> */}
                     </div>
                     <div className="DayEventViewEventButtons">
-                        {/* <DeleteEventDialog
-                                                    eventId={dayEvent._id}
-                                                    refreshEvents={getDayEventsAfterDeleteAdd}
-                                                /> */}
+                        <DeleteEventDialog eventId={dayEvent.id} refreshEvents={refreshEvents} />
                     </div>
                 </div>
             </div>

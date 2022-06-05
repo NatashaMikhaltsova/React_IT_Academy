@@ -119,7 +119,7 @@ const DayView = () => {
                         </div>
                     ) : (
                         <>
-                            {dayEvents.map((dayEvent) => <DayEventView key={dayEvent.id} dayEvent={dayEvent} />)}
+                            {dayEvents.map((dayEvent) => <DayEventView key={dayEvent.id} dayEvent={dayEvent} refreshEvents={getDayEventsAfterDeleteAdd} />)}
                         </>
                     )}
                 </div>

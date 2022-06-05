@@ -1,0 +1,50 @@
+.DayEventViewBox {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid #dae2f1;
+    font-weight: 300;
+    padding: 15px 0;
+}
+
+.DayEventView .DayEventViewnameNdesc {
+    padding-bottom: 6px;
+}
+
+.DayEventView .DayEventViewRightBox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.DayEventViewEventContentBox {
+    padding-left: 15px;
+    padding-right: 5px;
+}
+
+.DayEventViewEventTitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.DayEventViewEventDescr {
+    font-size: 1rem;
+    padding-top: 4px;
+}
+
+.DayEventViewEventButtonBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5px;
+}
+
+.DayEventViewEventButtons {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    opacity: 30%;
+    display: block;
+    padding: 3px 5px;
+}

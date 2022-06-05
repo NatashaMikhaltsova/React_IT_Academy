@@ -1,0 +1,107 @@
+.DayViewWrapper {
+    min-height: 100%;
+    background: #ECF0F8;
+}
+
+.DayViewTabs {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2px;
+    margin-right: 3px;
+}
+
+.DayViewNavIcon {
+    padding: 0 5px;
+    color: rgb(222, 87, 102);
+    border: 1px solid rgb(222, 87, 102);
+    border-radius: 4px;
+    margin: 0 3px;
+}
+
+.DayViewTabItem {
+    flex-grow: 1;
+    text-align: center;
+    background-color: rgb(150, 184, 252);
+    border: 1px solid #cedefd;
+    color: white;
+    text-transform: uppercase;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: none;
+    padding: 6px 0;
+    font-size: 1.2rem;
+}
+
+.DayViewContentSection {
+    position: absolute;
+    top: 300px;
+    width: 100%;
+}
+
+.DayViewHeader {
+    position: relative;
+}
+
+.DayViewDateDivSection {
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(90deg, rgba(152, 182, 252, 1) 0%, rgba(109, 231, 244, 1) 100%);
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.DayViewArrow {
+    color: white;
+    font-size: 3rem;
+    padding: 0 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.DayViewArrow:active {
+    outline: none;
+}
+
+.DayViewDateNumber {
+    color: #FFFFFF;
+    font-size: 5rem;
+    font-weight: 300;
+    padding: 0 20px;
+    border-right: solid 1px white;
+    box-sizing: border-box;
+    line-height: 4rem;
+}
+
+.DayViewDateRightSection {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+    padding: 0 20px;
+}
+
+.DayViewDateRightSection .DayViewright {
+    color: #FFFFFF;
+}
+
+.DayViewHeader path {
+    fill: url(#gradient);
+}
+
+.NoEventTodayWrapper {
+    text-align: center;
+    margin: auto;
+    padding-top: 30px;
+    font-size: 1.2rem;
+}
+
+.NoEventTodayWrapper .TapMsg {
+    padding-top: 15px;
+    font-size: 1.3rem;
+}
+
+.NoEventTodayImg {
+    max-width: 100vw;
+}

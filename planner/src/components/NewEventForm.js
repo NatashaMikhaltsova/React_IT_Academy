@@ -7,7 +7,7 @@ import NewEventCalendar from "./NewEventCalendar";
 import { calendarEvents, ESetDateForEvent } from '../eventEmitter';
 import './NewEventForm.css';
 
-const NewEventForm = ({ closeDialog }) => {
+const NewEventForm = ({ closeDialog, refreshEvents }) => {
     const [form, setForm] = useState({ title: "", description: "", date: "" });
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
@@ -73,6 +73,7 @@ const NewEventForm = ({ closeDialog }) => {
                 },
             });
             setButtonDisabled(true);
+            refreshEvents();
         }
 
         // call the function

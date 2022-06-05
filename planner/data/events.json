@@ -4,7 +4,55 @@
       "id": 0,
       "title": "First task",
       "description": "description",
-      "date": "Fri Jun 24 2022"
+      "date": "Fri Jun 24, 2022"
+    },
+    {
+      "id": 1,
+      "title": "Clean home",
+      "description": "",
+      "date": "Sat Jun 4, 2022"
+    },
+    {
+      "id": 2,
+      "title": "To water flowers",
+      "description": "",
+      "date": "Mon Jun 6, 2022"
+    },
+    {
+      "id": 3,
+      "title": "Visit Mike",
+      "description": "",
+      "date": "Tue Jun 7, 2022"
+    },
+    {
+      "id": 4,
+      "title": "Сomplete a graduation project",
+      "description": "",
+      "date": "Sun Jun 12, 2022"
+    },
+    {
+      "id": 5,
+      "title": "Take the cat to the vet",
+      "description": "",
+      "date": "Mon Jun 13, 2022"
+    },
+    {
+      "id": 6,
+      "title": "Visit the dentist",
+      "description": "",
+      "date": "Mon Jun 13, 2022"
+    },
+    {
+      "id": 7,
+      "title": "Shopping",
+      "description": "",
+      "date": "Mon Jun 6, 2022"
+    },
+    {
+      "id": 8,
+      "title": "Cinema",
+      "description": "Go to the cinema for viewing of the premiere of the Morbius movie ",
+      "date": "Mon Jun 6, 2022"
     }
   ]
 }

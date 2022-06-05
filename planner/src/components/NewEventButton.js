@@ -9,7 +9,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function NewEventButton() {
+export default function NewEventButton({ refreshEvents }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -25,7 +25,7 @@ export default function NewEventButton() {
             <button className="NewEventIcon" onClick={handleClickOpen}>+</button>
             <Dialog
                 fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-                <NewEventForm closeDialog={handleClose} />
+                <NewEventForm closeDialog={handleClose} refreshEvents={refreshEvents} />
             </Dialog>
         </div>
     );

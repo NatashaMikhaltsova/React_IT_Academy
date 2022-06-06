@@ -5,7 +5,7 @@ import isoFetch from 'isomorphic-fetch';
 import { format } from "date-fns";
 
 import './CalendarView.css';
-import NewEventButton from "../components/NewEventButton";
+import NewEventDialog from "../components/NewEventDialog";
 import noEventToday from "../images/img.png";
 import MonthCalendar from "../components/MonthCalendar";
 
@@ -86,7 +86,7 @@ const CalendarView = () => {
 
     return (
         <div className="CalendarViewWrapper">
-            <NewEventButton refreshEvents={getEventsAfterCreate} />
+            <NewEventDialog refreshEvents={getEventsAfterCreate} />
 
             <div className="CalendarViewTabs">
                 <div className="CalendarViewNavIcon">

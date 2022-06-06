@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import isoFetch from 'isomorphic-fetch';
 
 import './DayView.css';
-import NewEventButton from "../components/NewEventButton";
+import NewEventDialog from "../components/NewEventDialog";
 import picture from '../images/img.png';
 import DayEventView from "../components/DayEventView";
 
@@ -72,7 +72,7 @@ const DayView = () => {
 
     return (
         <div className="DayViewWrapper">
-            <NewEventButton refreshEvents={getDayEventsAfterDeleteAdd} />
+            <NewEventDialog refreshEvents={getDayEventsAfterDeleteAdd} />
             <div className="DayViewTabs">
                 <NavLink to={"/"} className="DayViewNavIcon">
                     <AiOutlineHome size={30} />

@@ -6,7 +6,7 @@ import { MdToday } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 
 import plannerLogo from "../images/planner_logo.png";
-import NewEventButton from "../components/NewEventButton";
+import NewEventDialog from "../components/NewEventDialog";
 import Weather from "../components/Weather";
 import NewsFeed from "../components/NewsFeed";
 import './Homepage.css';
@@ -49,7 +49,7 @@ const Homepage = () => {
             </div>
             <Weather />
             <NewsFeed today={today} />
-            <NewEventButton />
+            <NewEventDialog />
         </div>
     );
 };

@@ -1,4 +1,4 @@
-.NewEventFormTop {
+.EventFormTop {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,14 +8,14 @@
     padding-bottom: 30px;
 }
 
-.NewEventFormActionsSection {
+.EventFormActionsSection {
     text-align: center;
     padding-top: 30px;
     padding-bottom: 15px;
     width: 100%;
 }
 
-.NewEventFormButtonCreate {
+.EventFormButtonCreate {
     border: none;
     background-color: rgb(184, 233, 134);
     color: #000000;
@@ -29,11 +29,11 @@
     z-index: -1;
 }
 
-.NewEventFormButtonCreate:disabled {
+.EventFormButtonCreate:disabled {
     opacity: 0.3;
 }
 
-.NewEventFormButtonClose {
+.EventFormButtonClose {
     border: none;
     background-color: rgb(164, 168, 242);
     color: #FFFFFF;
@@ -48,7 +48,7 @@
     border-radius: 50px;
 }
 
-.NewEventFormTitle {
+.EventFormTitle {
     margin: 10px 0;
     width: 75vw;
     border: none;
@@ -59,16 +59,16 @@
     background-color: transparent;
 }
 
-.NewEventFormTitle:focus {
+.EventFormTitle:focus {
     outline: none;
 }
 
-.NewEventFormTitle::placeholder {
+.EventFormTitle::placeholder {
     opacity: 50%;
     font-weight: 400;
 }
 
-.NewEventFormDescription {
+.EventFormDescription {
     margin: 10px 0;
     width: 75vw;
     border: none;
@@ -78,34 +78,34 @@
     background-color: transparent;
 }
 
-.NewEventFormDescription:focus {
+.EventFormDescription:focus {
     outline: none;
 }
 
-.NewEventFormDescription::placeholder {
+.EventFormDescription::placeholder {
     opacity: 60%;
 }
 
-.NewEventFormSection {
+.EventFormSection {
     width: 100%;
     box-sizing: border-box;
     border-top: 1px solid #b3b3b3;
     padding: 15px 20px;
 }
 
-.NewEventFormdateNTimeInputSection {
+.EventFormdateNTimeInputSection {
     display: flex;
     justify-content: left;
     align-items: center;
 }
 
-.NewEventFormLabel {
+.EventFormLabel {
     padding-bottom: 10px;
     display: block;
     font-size: 1.2rem;
 }
 
-.NewEventFormInputBorder {
+.EventFormInputBorder {
     border: 1px solid #b3b3b3;
     border-radius: 3px;
     display: inline-block;
@@ -114,21 +114,21 @@
     display: flex;
 }
 
-.NewEventFormSectionInput {
+.EventFormSectionInput {
     padding: 5px 0;
     font-size: 1rem;
     width: 140px;
 }
 
-.NewEventFormSectionInput:focus {
+.EventFormSectionInput:focus {
     outline: none;
 }
 
-.NewEventFormSectionInput::placeholder {
+.EventFormSectionInput::placeholder {
     opacity: 70%;
 }
 
-.NewEventFormCalendarForm {
+.EventFormCalendarForm {
     padding: 0 6vw;
     padding-bottom: 70px;
     height: 100vh;

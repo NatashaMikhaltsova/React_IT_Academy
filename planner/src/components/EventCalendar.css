@@ -1,8 +1,8 @@
-.NewEventCalendarWrapper {
+.EventCalendarWrapper {
     z-index: 10;
 }
 
-.NewEventCalendarWrapper .react-calendar {
+.EventCalendarWrapper .react-calendar {
     background: white;
     line-height: 2em;
     text-align: center;
@@ -12,31 +12,31 @@
     display: flex;
 }
 
-.NewEventCalendarWrapper .react-calendar button {
+.EventCalendarWrapper .react-calendar button {
     border: none;
     outline: none;
     font-size: 1.3rem;
 }
 
-.NewEventCalendarWrapper .react-calendar__month-view__weekdays__weekday abbr {
+.EventCalendarWrapper .react-calendar__month-view__weekdays__weekday abbr {
     text-decoration: none;
 }
 
-.NewEventCalendarWrapper .react-calendar__month-view__days__day--neighboringMonth {
+.EventCalendarWrapper .react-calendar__month-view__days__day--neighboringMonth {
     color: #c1c7c3;
 }
 
-.NewEventCalendarWrapper .react-calendar__tile--active {
+.EventCalendarWrapper .react-calendar__tile--active {
     background: rgb(97, 191, 191);
     color: white;
 }
 
-.NewEventCalendarButtonBox {
+.EventCalendarButtonBox {
     display: flex;
 
 }
 
-.NewEventCalendarOkButton {
+.EventCalendarOkButton {
     border: none;
     font-size: 1.4rem;
     font-weight: 500;

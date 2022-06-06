@@ -3,7 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import { BiEditAlt } from "react-icons/bi";
 
-import EditEventForm from "./EditEventForm";
+import EventForm from "./EventForm";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -29,11 +29,7 @@ export default function EditEventDialog({ currentEvent, refreshEvents }) {
                 onClose={handleClose}
                 TransitionComponent={Transition}
             >
-                <EditEventForm
-                    closeDialog={handleClose}
-                    refreshEvents={refreshEvents}
-                    currentEvent={currentEvent}
-                />
+                <EventForm event={currentEvent} closeDialog={handleClose} refreshEvents={refreshEvents} />
             </Dialog>
         </div>
     );

@@ -6,11 +6,11 @@
     padding: 15px 0;
 }
 
-.DayEventView .DayEventViewnameNdesc {
+.DayEventViewBox .DayEventViewnameNdesc {
     padding-bottom: 6px;
 }
 
-.DayEventView .DayEventViewRightBox {
+.DayEventViewBox .DayEventViewRightBox {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -34,7 +34,7 @@
 
 .DayEventViewEventButtonBox {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     padding-right: 5px;

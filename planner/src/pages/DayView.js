@@ -9,12 +9,20 @@ import './DayView.css';
 import NewEventDialog from "../components/NewEventDialog";
 import picture from '../images/img.png';
 import DayEventView from "../components/DayEventView";
+import { withDataLoad } from '../components/withDataLoad';
 
-const DayView = () => {
+const fetchConfig = {
+    URL: "http://localhost:3005/events",
+    method: 'get',
+    headers: {
+        "Accept": "application/json",
+    },
+};
+
+const DayView = ({ initDayEvents }) => {
     const [dayEvents, setDayEvents] = useState([]);
-    const [status, setStatus] = useState("loading");
-    const params = useParams();
     const navigate = useNavigate();
+    const params = useParams();
     const day = new Date(
         params.date.slice(0, 4),
         params.date.slice(5, 7) - 1,
@@ -23,32 +31,17 @@ const DayView = () => {
     let dayString = format(day, "EEE MMM d, y");
 
     useEffect(() => {
-        setStatus("loading");
-        const fetchData = async () => {
-            const response = await isoFetch("http://localhost:3005/events");
-            // convert the data to json
-            let data = await response.json();
-            let filteredData = data.filter(el => dayString === el.date);
-            setDayEvents(filteredData);
-            setStatus("idle");
-        }
-        // call the function
-        fetchData()
-            // make sure to catch any error
-            .catch((error) => {
-                console.log("error!", error);
-            });
-    }, [dayString]);
+        let filteredData = initDayEvents.filter(el => dayString === el.date);
+        setDayEvents(filteredData);
+    }, [dayString, initDayEvents]);
 
     const getDayEventsAfterDeleteAdd = async () => {
-        setStatus("loading");
         const fetchData = async () => {
             const response = await isoFetch("http://localhost:3005/events");
             // convert the data to json
             let data = await response.json();
             let filteredData = data.filter(el => dayString === el.date);
             setDayEvents(filteredData);
-            setStatus("idle");
         }
         // call the function
         fetchData()
@@ -109,23 +102,23 @@ const DayView = () => {
                     ></path>
                 </svg>
             </div>
-            {status === "loading" ? null : (
-                <div className="DayViewContentSection">
-                    {dayEvents.length === 0 ? (
-                        <div className="NoEventTodayWrapper">
-                            <p>You have nothing planned for the day!</p>
-                            <p className="TapMsg">Tap " + " to add a task.</p>
-                            <img className="NoEventTodayImg" src={picture} alt="planning event" />
-                        </div>
-                    ) : (
-                        <>
-                            {dayEvents.map((dayEvent) => <DayEventView key={dayEvent.id} dayEvent={dayEvent} refreshEvents={getDayEventsAfterDeleteAdd} />)}
-                        </>
-                    )}
-                </div>
-            )}
+            <div className="DayViewContentSection">
+                {dayEvents.length === 0 ? (
+                    <div className="NoEventTodayWrapper">
+                        <p>You have nothing planned for the day!</p>
+                        <p className="TapMsg">Tap " + " to add a task.</p>
+                        <img className="NoEventTodayImg" src={picture} alt="planning event" />
+                    </div>
+                ) : (
+                    <>
+                        {dayEvents.map((dayEvent) => <DayEventView key={dayEvent.id} dayEvent={dayEvent} refreshEvents={getDayEventsAfterDeleteAdd} />)}
+                    </>
+                )}
+            </div>
         </div>
     );
 };
 
-export default DayView;
+const DayViewWithData = withDataLoad(fetchConfig, "initDayEvents")(DayView);
+
+export default DayViewWithData;

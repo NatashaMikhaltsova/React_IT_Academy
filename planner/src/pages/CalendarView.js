@@ -93,11 +93,11 @@ const CalendarView = () => {
 
             <div className="CalendarViewTabs">
                 <div className="CalendarViewNavIcon">
-                    <AiOutlineHome onClick={() => navigate("/")} size={30} />
+                    <AiOutlineHome style={{ cursor: "pointer" }} onClick={() => navigate("/")} size={30} />
                 </div>
-                <div className="CalendarViewTabItem" onClick={() => navigate(`/month/${monthParam}`)}>month</div>
+                <div className="CalendarViewTabItem" style={{ cursor: "pointer" }} onClick={() => navigate(`/month/${monthParam}`)}>month</div>
                 <div className="CalendarViewTabItem"
-                    style={{ backgroundColor: "#b5cdfd" }}
+                    style={{ backgroundColor: "#b5cdfd", cursor: "pointer" }}
                     onClick={() => navigate(`/date/${format(new Date(), "y-MM-dd")}`)}>
                     Day
                 </div>
@@ -115,7 +115,7 @@ const CalendarView = () => {
                     ) : null}
                     <div>
                         {monthEvents && monthEvents.map((ev) => (
-                            <div key={`${ev.date}`} className="CalendarViewEventBox"
+                            <div key={`${ev.date}`} className="CalendarViewEventBox" style={{ cursor: "pointer" }}
                                 onClick={() => navigate(`/date/${format(new Date(ev.date), "y-MM-dd")}`)}
                             >
                                 <div className="CalendarViewDateBox">

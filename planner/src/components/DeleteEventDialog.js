@@ -40,7 +40,7 @@ export default function DeleteEventDialog({ eventId, refreshEvents }) {
 
   return (
     <div>
-      <button className="DeleteEventDialogDeleteButton" onClick={handleClickOpen}>
+      <button className="DeleteEventDialogDeleteButton" style={{ cursor: "pointer" }} onClick={handleClickOpen}>
         <RiDeleteBinLine />
       </button>
       <Dialog

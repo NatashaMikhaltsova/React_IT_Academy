@@ -22,7 +22,7 @@ export default function NewEventDialog({ refreshEvents }) {
 
     return (
         <div>
-            <button className="NewEventIcon" onClick={handleClickOpen}>+</button>
+            <button className="NewEventIcon" style={{cursor: "pointer"}} onClick={handleClickOpen}>+</button>
             <Dialog
                 fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <EventForm event={{ title: "", description: "", date: "" }} closeDialog={handleClose} refreshEvents={refreshEvents} />

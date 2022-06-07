@@ -21,7 +21,7 @@ export default function EditEventDialog({ currentEvent, refreshEvents }) {
     };
 
     return (
-        <div>
+        <div style={{ cursor: "pointer" }}>
             <BiEditAlt onClick={handleClickOpen} />
             <Dialog
                 fullScreen

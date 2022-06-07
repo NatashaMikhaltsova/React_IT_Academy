@@ -70,7 +70,7 @@ const DayView = ({ initDayEvents }) => {
                 <NavLink to={"/"} className="DayViewNavIcon">
                     <AiOutlineHome size={30} />
                 </NavLink>
-                <NavLink to={"/calendar-month"} className="DayViewTabItem" style={{ backgroundColor: "#b5cdfd" }}>
+                <NavLink to={`/month/${format(day, "MMM")}`} className="DayViewTabItem" style={{ backgroundColor: "#b5cdfd" }}>
                     month
                 </NavLink>
                 <NavLink to={`/date/${format(day, "y-MM-dd")}`} className="DayViewTabItem">Day</NavLink>

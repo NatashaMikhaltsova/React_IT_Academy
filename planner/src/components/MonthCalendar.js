@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import { useNavigate } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 
 import './MonthCalendar.css';
 
 const MonthCalendar = ({ updateCurrentMonth }) => {
+    const today = new Date();
+    const params = useParams();
+    
     /**Calendar state and functions */
-    const [value, setValue] = useState(new Date());
+    const [value, setValue] = useState(new Date(`${today.getDate()} ${params.month} ${today.getFullYear()}`));
 
     function onChange(nextValue) {
         setValue(nextValue);

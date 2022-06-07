@@ -37,7 +37,7 @@ const Homepage = () => {
                     <MdToday size="40" color={"#787ab8"} />
                     <span className="HomepageIconText">Today</span>
                 </NavLink>
-                <NavLink to="/calendar-month" className="HomepageActionIcon">
+                <NavLink to={`/month/${format(today, "MMM")}`} className="HomepageActionIcon">
                     <GoCalendar size="40" color={"#787ab8"} />
                     <span className="HomepageIconText">Month</span>
                 </NavLink>

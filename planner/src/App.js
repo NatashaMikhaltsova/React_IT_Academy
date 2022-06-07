@@ -12,7 +12,7 @@ function App() {
 			<React.Fragment>
 				<Routes>
 					<Route path="/" element={<Homepage />} />
-					<Route path="/calendar-month" element={<CalendarView />} />
+					<Route path="/month/:month" element={<CalendarView />} />
 					<Route path="/date/:date" element={<DayViewWithData />} />
 				</Routes>
 			</React.Fragment>

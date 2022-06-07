@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useParams } from "react-router";
 import { AiOutlineHome } from "react-icons/ai";
 import isoFetch from 'isomorphic-fetch';
 import { format } from "date-fns";
@@ -38,9 +39,10 @@ const getSortedMonthEvents = (dataArr) => {
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const CalendarView = () => {
-    const today = new Date();
+    const params = useParams();
+    const monthParam = params.month;
     const [status, setStatus] = useState("loading");
-    const [currentMonth, setCurrentMonth] = useState(today.getMonth());
+    const [currentMonth, setCurrentMonth] = useState(monthNames.indexOf(monthParam));
     const [monthEvents, setMonthEvents] = useState([]);
 
     // Handle function to pass to Calendar
@@ -55,6 +57,7 @@ const CalendarView = () => {
             let data = await response.json();
             let filteredMonthData = data.filter(el => monthNames[currentMonth] === el.date.match(/ \w+? /g)[0].trim());
             setMonthEvents(getSortedMonthEvents(filteredMonthData));
+            navigate(`/month/${monthNames[currentMonth]}`);
             setStatus("idle");
         }
         // call the function
@@ -92,7 +95,7 @@ const CalendarView = () => {
                 <div className="CalendarViewNavIcon">
                     <AiOutlineHome onClick={() => navigate("/")} size={30} />
                 </div>
-                <div className="CalendarViewTabItem" onClick={() => navigate("/calendar-month")}>month</div>
+                <div className="CalendarViewTabItem" onClick={() => navigate(`/month/${monthParam}`)}>month</div>
                 <div className="CalendarViewTabItem"
                     style={{ backgroundColor: "#b5cdfd" }}
                     onClick={() => navigate(`/date/${format(new Date(), "y-MM-dd")}`)}>

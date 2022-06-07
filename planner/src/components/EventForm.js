@@ -5,12 +5,14 @@ import isoFetch from 'isomorphic-fetch';
 import { format } from "date-fns";
 
 import EventCalendar from "./EventCalendar";
+import useUnsavedChangesWarning from "../helpers/useUnsavedChangesWarning";
 import './EventForm.css';
 
 const EventForm = ({ event, closeDialog, refreshEvents }) => {
     const [form, setForm] = useState(event);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const calendarFormRef = useRef(null);
+    const [Prompt, setDirty, setPristine] = useUnsavedChangesWarning();
 
     useEffect(() => {
         if (form.title && form.date) setButtonDisabled(false);
@@ -54,6 +56,7 @@ const EventForm = ({ event, closeDialog, refreshEvents }) => {
                 },
             });
             setButtonDisabled(true);
+            setPristine();
             refreshEvents();
         }
 
@@ -79,6 +82,7 @@ const EventForm = ({ event, closeDialog, refreshEvents }) => {
                 },
             });
             setButtonDisabled(true);
+            setPristine();
             refreshEvents();
         }
 
@@ -95,8 +99,14 @@ const EventForm = ({ event, closeDialog, refreshEvents }) => {
         <div>
             <form>
                 <div className="EventFormTop">
-                    <input className="EventFormTitle" type="text" placeholder="Event title" value={form.title} onChange={(ev) => handleTitle(ev.target.value)} />
-                    <input className="EventFormDescription" type="text" placeholder="What will happen?" value={form.description} onChange={(ev) => handleDescription(ev.target.value)} />
+                    <input className="EventFormTitle" type="text" placeholder="Event title" value={form.title} onChange={(ev) => {
+                        handleTitle(ev.target.value);
+                        setDirty();
+                    }} />
+                    <input className="EventFormDescription" type="text" placeholder="What will happen?" value={form.description} onChange={(ev) => {
+                        handleDescription(ev.target.value);
+                        setDirty();
+                    }} />
                 </div>
                 <div className="EventFormSection">
                     <label className="EventFormLabel">Date</label>
@@ -107,7 +117,10 @@ const EventForm = ({ event, closeDialog, refreshEvents }) => {
                         </div>
                     </div>
                     <div className="EventFormCalendarForm" ref={calendarFormRef}>
-                        <EventCalendar onClickDay={(value, event) => setDate(value, event)} />
+                        <EventCalendar onClickDay={(value, event) => {
+                            setDate(value, event);
+                            setDirty();
+                        }} />
                     </div>
                 </div>
             </form>
@@ -119,6 +132,7 @@ const EventForm = ({ event, closeDialog, refreshEvents }) => {
                     {event.title ? "Update event" : "Create event"}
                 </button>
             </div>
+            {Prompt}
         </div>
     );
 };

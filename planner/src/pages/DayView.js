@@ -77,13 +77,13 @@ const DayView = ({ initDayEvents }) => {
             </div>
             <div className="DayViewHeader">
                 <div className="DayViewDateDivSection">
-                    <button className="DayViewArrow" onClick={(ev) => previousDay()}>{"‹"}</button>
+                    <button className="DayViewArrow" style={{ cursor: "pointer" }} onClick={(ev) => previousDay()}>{"‹"}</button>
                     <div className="DayViewDateNumber">{format(day, "dd")}</div>
                     <div className="DayViewDateRightSection">
                         <div className="DayViewright">{format(day, "MMMM")}</div>
                         <div className="DayViewright">{format(day, "Y")}</div>
                     </div>
-                    <button className="DayViewArrow" onClick={(ev) => nextDay()}>{"›"}</button>
+                    <button className="DayViewArrow" style={{ cursor: "pointer" }} onClick={(ev) => nextDay()}>{"›"}</button>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                     <defs>

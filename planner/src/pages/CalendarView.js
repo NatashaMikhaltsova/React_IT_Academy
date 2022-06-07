@@ -94,11 +94,6 @@ const CalendarView = () => {
                 </div>
                 <div className="CalendarViewTabItem" onClick={() => navigate("/calendar-month")}>month</div>
                 <div className="CalendarViewTabItem"
-                    onClick={() => navigate(`/week/${format(new Date(), "y-MM-dd")}`)}
-                    style={{ backgroundColor: "#b5cdfd" }}>
-                    week
-                </div>
-                <div className="CalendarViewTabItem"
                     style={{ backgroundColor: "#b5cdfd" }}
                     onClick={() => navigate(`/date/${format(new Date(), "y-MM-dd")}`)}>
                     Day

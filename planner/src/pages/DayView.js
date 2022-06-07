@@ -73,9 +73,6 @@ const DayView = ({ initDayEvents }) => {
                 <NavLink to={"/calendar-month"} className="DayViewTabItem" style={{ backgroundColor: "#b5cdfd" }}>
                     month
                 </NavLink>
-                <NavLink to={`/week/${params.date}`} className="DayViewTabItem" style={{ backgroundColor: "#b5cdfd" }}>
-                    week
-                </NavLink>
                 <NavLink to={`/date/${format(day, "y-MM-dd")}`} className="DayViewTabItem">Day</NavLink>
             </div>
             <div className="DayViewHeader">

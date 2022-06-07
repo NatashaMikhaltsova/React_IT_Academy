@@ -1,7 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
 import { GoCalendar } from "react-icons/go";
-import { BiCalendarWeek } from "react-icons/bi";
 import { MdToday } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 
@@ -37,10 +36,6 @@ const Homepage = () => {
                 <NavLink to={`/date/${format(today, "y-MM-dd")}`} className="HomepageActionIcon">
                     <MdToday size="40" color={"#787ab8"} />
                     <span className="HomepageIconText">Today</span>
-                </NavLink>
-                <NavLink to={`/week/${format(today, "y-MM-dd")}`} className="HomepageActionIcon">
-                    <BiCalendarWeek size="40" color={"#787ab8"} />
-                    <span className="HomepageIconText">Week</span>
                 </NavLink>
                 <NavLink to="/calendar-month" className="HomepageActionIcon">
                     <GoCalendar size="40" color={"#787ab8"} />

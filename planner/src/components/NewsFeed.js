@@ -21,7 +21,7 @@ const NewsFeed = ({ today }) => {
 			// convert the data to json
 			const data = await response.json();
 			// setArticles with the result if `isSubscribed` is true
-			if (isSubscribed) {
+			if (isSubscribed && data.articles) {
 				setArticles(data.articles.slice(0, 9));
 			}
 		}

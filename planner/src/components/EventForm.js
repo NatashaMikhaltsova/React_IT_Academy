@@ -6,9 +6,10 @@ import { format } from "date-fns";
 
 import EventCalendar from "./EventCalendar";
 import useUnsavedChangesWarning from "../helpers/useUnsavedChangesWarning";
+import { eventHandler, ERefreshDayEvents } from "../eventEmitter";
 import './EventForm.css';
 
-const EventForm = ({ event, closeDialog, refreshEvents }) => {
+const EventForm = ({ event, closeDialog }) => {
     const [form, setForm] = useState(event);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const calendarFormRef = useRef(null);
@@ -57,7 +58,7 @@ const EventForm = ({ event, closeDialog, refreshEvents }) => {
             });
             setButtonDisabled(true);
             setPristine();
-            refreshEvents();
+            eventHandler.emit(ERefreshDayEvents);
         }
 
         // call the function
@@ -83,7 +84,8 @@ const EventForm = ({ event, closeDialog, refreshEvents }) => {
             });
             setButtonDisabled(true);
             setPristine();
-            refreshEvents();
+            eventHandler.emit(ERefreshDayEvents);
+            closeDialog();
         }
 
         // call the function

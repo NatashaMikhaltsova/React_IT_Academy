@@ -4,7 +4,7 @@ import DeleteEventDialog from "../components/DeleteEventDialog";
 import EditEventDialog from "../components/EditEventDialog";
 import './DayEventView.css';
 
-const DayEventView = ({ dayEvent, refreshEvents }) => {
+const DayEventView = ({ dayEvent }) => {
 
     return (
         <div className="DayEventViewBox">
@@ -19,10 +19,10 @@ const DayEventView = ({ dayEvent, refreshEvents }) => {
                 </div>
                 <div className="DayEventViewEventButtonBox">
                     <div className="DayEventViewEventButtons">
-                        <EditEventDialog currentEvent={dayEvent} refreshEvents={refreshEvents} />
+                        <EditEventDialog currentEvent={dayEvent} />
                     </div>
                     <div className="DayEventViewEventButtons">
-                        <DeleteEventDialog eventId={dayEvent.id} refreshEvents={refreshEvents} />
+                        <DeleteEventDialog eventId={dayEvent.id} />
                     </div>
                 </div>
             </div>

@@ -9,6 +9,7 @@ import './CalendarView.css';
 import NewEventDialog from "../components/NewEventDialog";
 import noEventToday from "../images/img.png";
 import MonthCalendar from "../components/MonthCalendar";
+import { eventHandler, ERefreshDayEvents } from "../eventEmitter";
 
 const getSortedMonthEvents = (dataArr) => {
     let dates = [];
@@ -66,6 +67,10 @@ const CalendarView = () => {
             .catch((error) => {
                 console.log("error!", error);
             });
+        eventHandler.addListener(ERefreshDayEvents, getEventsAfterCreate);
+        return () => {
+            eventHandler.removeListener(ERefreshDayEvents, getEventsAfterCreate);
+        }
     }, [currentMonth]);
 
     const getEventsAfterCreate = async () => {
@@ -89,7 +94,7 @@ const CalendarView = () => {
 
     return (
         <div className="CalendarViewWrapper">
-            <NewEventDialog refreshEvents={getEventsAfterCreate} />
+            <NewEventDialog />
 
             <div className="CalendarViewTabs">
                 <div className="CalendarViewNavIcon">

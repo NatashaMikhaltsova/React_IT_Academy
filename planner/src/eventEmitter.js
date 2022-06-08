@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 
-const calendarEvents = new EventEmitter();
-const ESetDateForEvent = 'ESetDateForEvent';
+const eventHandler = new EventEmitter();
+const ERefreshDayEvents = 'ERefreshDayEvents'; //update day events list
 
-export { calendarEvents, ESetDateForEvent };
+
+export { eventHandler, ERefreshDayEvents };

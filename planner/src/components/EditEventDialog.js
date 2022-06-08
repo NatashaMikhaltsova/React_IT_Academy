@@ -9,7 +9,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditEventDialog({ currentEvent, refreshEvents }) {
+export default function EditEventDialog({ currentEvent }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -29,7 +29,7 @@ export default function EditEventDialog({ currentEvent, refreshEvents }) {
                 onClose={handleClose}
                 TransitionComponent={Transition}
             >
-                <EventForm event={currentEvent} closeDialog={handleClose} refreshEvents={refreshEvents} />
+                <EventForm event={currentEvent} closeDialog={handleClose} />
             </Dialog>
         </div>
     );

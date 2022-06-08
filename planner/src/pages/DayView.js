@@ -9,6 +9,7 @@ import './DayView.css';
 import NewEventDialog from "../components/NewEventDialog";
 import picture from '../images/img.png';
 import DayEventView from "../components/DayEventView";
+import { eventHandler, ERefreshDayEvents } from "../eventEmitter";
 import { withDataLoad } from '../components/withDataLoad';
 
 const fetchConfig = {
@@ -33,6 +34,10 @@ const DayView = ({ initDayEvents }) => {
     useEffect(() => {
         let filteredData = initDayEvents.filter(el => dayString === el.date);
         setDayEvents(filteredData);
+        eventHandler.addListener(ERefreshDayEvents, getDayEventsAfterDeleteAdd);
+        return () => {
+            eventHandler.removeListener(ERefreshDayEvents, getDayEventsAfterDeleteAdd)
+        }
     }, [dayString, initDayEvents]);
 
     const getDayEventsAfterDeleteAdd = async () => {
@@ -65,7 +70,7 @@ const DayView = ({ initDayEvents }) => {
 
     return (
         <div className="DayViewWrapper">
-            <NewEventDialog refreshEvents={getDayEventsAfterDeleteAdd} />
+            <NewEventDialog />
             <div className="DayViewTabs">
                 <NavLink to={"/"} className="DayViewNavIcon">
                     <AiOutlineHome size={30} />
@@ -100,7 +105,7 @@ const DayView = ({ initDayEvents }) => {
                 </svg>
             </div>
             <div className="DayViewContentSection">
-                {dayEvents.length === 0 ? (
+                {(!dayEvents) ? null : dayEvents.length === 0 ? (
                     <div className="NoEventTodayWrapper">
                         <p>You have nothing planned for the day!</p>
                         <p className="TapMsg">Tap " + " to add a task.</p>
@@ -108,7 +113,7 @@ const DayView = ({ initDayEvents }) => {
                     </div>
                 ) : (
                     <>
-                        {dayEvents.map((dayEvent) => <DayEventView key={dayEvent.id} dayEvent={dayEvent} refreshEvents={getDayEventsAfterDeleteAdd} />)}
+                        {dayEvents.map((dayEvent) => <DayEventView key={dayEvent.id} dayEvent={dayEvent} />)}
                     </>
                 )}
             </div>

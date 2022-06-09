@@ -59,12 +59,14 @@ const DayView = ({ initDayEvents }) => {
     const nextDay = () => {
         let nextDay = new Date().setDate(day.getDate() + 1);
         let nextDayString = format(nextDay, "y-MM-dd");
+        dayString = format(nextDay, "EEE MMM d, y");
         navigate(`/date/${nextDayString}`);
     };
 
     const previousDay = () => {
         let previousDay = new Date().setDate(day.getDate() - 1);
         let previousDayString = format(previousDay, "y-MM-dd");
+        dayString = format(previousDay, "EEE MMM d, y");
         navigate(`/date/${previousDayString}`);
     };
 

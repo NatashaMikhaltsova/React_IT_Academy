@@ -81,7 +81,7 @@ const CalendarView = () => {
             // convert the data to json
             let data = await response.json();
             let filteredMonthData = data.filter(el => monthNames[currentMonth] === el.date.match(/ \w+? /g)[0].trim());
-            setMonthEvents(filteredMonthData);
+            setMonthEvents(getSortedMonthEvents(filteredMonthData));
             setStatus("idle");
         }
         // call the function
@@ -95,7 +95,6 @@ const CalendarView = () => {
     return (
         <div className="CalendarViewWrapper">
             <NewEventDialog />
-
             <div className="CalendarViewTabs">
                 <div className="CalendarViewNavIcon">
                     <AiOutlineHome style={{ cursor: "pointer" }} onClick={() => navigate("/")} size={30} />
@@ -110,14 +109,13 @@ const CalendarView = () => {
             <MonthCalendar updateCurrentMonth={updateCurrentMonth} />
 
             {status === "loading" ? null : (
-                <>
-                    {monthEvents && monthEvents.length === 0 ? (
-                        <div className="CalendarViewNoEventsSection">
-                            <p>You have nothing planned!</p>
-                            <p>Tap " + " to add a task.</p>
-                            <img className="CalendarViewAddEventImg" src={noEventToday} alt="Add fun activities" />
-                        </div>
-                    ) : null}
+                <>{(!monthEvents) ? null : monthEvents.length === 0 ? (
+                    <div className="CalendarViewNoEventsSection">
+                        <p>You have nothing planned!</p>
+                        <p>Tap " + " to add a task.</p>
+                        <img className="CalendarViewAddEventImg" src={noEventToday} alt="Add fun activities" />
+                    </div>
+                ) : (
                     <div>
                         {monthEvents && monthEvents.map((ev) => (
                             <div key={`${ev.date}`} className="CalendarViewEventBox" style={{ cursor: "pointer" }}
@@ -141,7 +139,7 @@ const CalendarView = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </div>)}
                 </>
             )}
         </div>

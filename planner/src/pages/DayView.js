@@ -20,8 +20,9 @@ const fetchConfig = {
     },
 };
 
-const DayView = ({ initDayEvents }) => {
-    const [dayEvents, setDayEvents] = useState([]);
+const DayView = ({ initEvents }) => {
+    const [events, setEvents] = useState(initEvents);
+    const [filteredDayEvents, setFilteredDayEvents] = useState([]);
     const navigate = useNavigate();
     const params = useParams();
     const day = new Date(
@@ -32,21 +33,20 @@ const DayView = ({ initDayEvents }) => {
     let dayString = format(day, "EEE MMM d, y");
 
     useEffect(() => {
-        let filteredData = initDayEvents.filter(el => dayString === el.date);
-        setDayEvents(filteredData);
-        eventHandler.addListener(ERefreshDayEvents, getDayEventsAfterDeleteAdd);
+        let filteredData = events.filter(el => dayString === el.date);
+        setFilteredDayEvents(filteredData);
+        eventHandler.addListener(ERefreshDayEvents, refreshDayEvents);
         return () => {
-            eventHandler.removeListener(ERefreshDayEvents, getDayEventsAfterDeleteAdd)
+            eventHandler.removeListener(ERefreshDayEvents, refreshDayEvents)
         }
-    }, [dayString, initDayEvents]);
+    }, [dayString, events]);
 
-    const getDayEventsAfterDeleteAdd = async () => {
+    const refreshDayEvents = async () => {
         const fetchData = async () => {
             const response = await isoFetch("http://localhost:3005/events");
             // convert the data to json
             let data = await response.json();
-            let filteredData = data.filter(el => dayString === el.date);
-            setDayEvents(filteredData);
+            setEvents(data);
         }
         // call the function
         fetchData()
@@ -59,15 +59,15 @@ const DayView = ({ initDayEvents }) => {
     const nextDay = () => {
         let nextDay = new Date().setDate(day.getDate() + 1);
         let nextDayString = format(nextDay, "y-MM-dd");
-        dayString = format(nextDay, "EEE MMM d, y");
         navigate(`/date/${nextDayString}`);
+        dayString = format(nextDay, "EEE MMM d, y");
     };
 
     const previousDay = () => {
         let previousDay = new Date().setDate(day.getDate() - 1);
         let previousDayString = format(previousDay, "y-MM-dd");
-        dayString = format(previousDay, "EEE MMM d, y");
         navigate(`/date/${previousDayString}`);
+        dayString = format(previousDay, "EEE MMM d, y");
     };
 
     return (
@@ -107,7 +107,7 @@ const DayView = ({ initDayEvents }) => {
                 </svg>
             </div>
             <div className="DayViewContentSection">
-                {(!dayEvents) ? null : dayEvents.length === 0 ? (
+                {(!filteredDayEvents) ? null : filteredDayEvents.length === 0 ? (
                     <div className="NoEventTodayWrapper">
                         <p>You have nothing planned for the day!</p>
                         <p className="TapMsg">Tap " + " to add a task.</p>
@@ -115,7 +115,7 @@ const DayView = ({ initDayEvents }) => {
                     </div>
                 ) : (
                     <>
-                        {dayEvents.map((dayEvent) => <DayEventView key={dayEvent.id} dayEvent={dayEvent} />)}
+                        {filteredDayEvents.map((dayEvent) => <DayEventView key={dayEvent.id} dayEvent={dayEvent} />)}
                     </>
                 )}
             </div>
@@ -123,6 +123,6 @@ const DayView = ({ initDayEvents }) => {
     );
 };
 
-const DayViewWithData = withDataLoad(fetchConfig, "initDayEvents")(DayView);
+const DayViewWithData = withDataLoad(fetchConfig, "initEvents")(DayView);
 
 export default DayViewWithData;

@@ -3,6 +3,7 @@ import { FiCalendar } from "react-icons/fi";
 import { GrClose } from "react-icons/gr";
 import isoFetch from 'isomorphic-fetch';
 import { format } from "date-fns";
+import { FcCheckmark } from "react-icons/fc";
 
 import EventCalendar from "./EventCalendar";
 import useUnsavedChangesWarning from "../helpers/useUnsavedChangesWarning";
@@ -12,6 +13,7 @@ import './EventForm.css';
 const EventForm = ({ event, closeDialog }) => {
     const [form, setForm] = useState(event);
     const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [status, setStatus] = useState("idle");
     const calendarFormRef = useRef(null);
     const [Prompt, setDirty, setPristine] = useUnsavedChangesWarning();
 
@@ -38,6 +40,7 @@ const EventForm = ({ event, closeDialog }) => {
 
     const CreateEvent = (event) => {
         event.preventDefault();
+        setStatus("loading");
 
         const getLastElementID = async () => {
             const response = await isoFetch("http://localhost:3005/events");
@@ -56,9 +59,11 @@ const EventForm = ({ event, closeDialog }) => {
                     "Content-Type": "application/json",
                 },
             });
+            setStatus("created");
             setButtonDisabled(true);
             setPristine();
             eventHandler.emit(ERefreshDayEvents);
+            setForm({ title: "", description: "", date: "" });
         }
 
         // call the function
@@ -103,10 +108,12 @@ const EventForm = ({ event, closeDialog }) => {
                 <div className="EventFormTop">
                     <input className="EventFormTitle" type="text" placeholder="Event title" value={form.title} onChange={(ev) => {
                         handleTitle(ev.target.value);
+                        setStatus("idle");
                         setDirty();
                     }} />
                     <input className="EventFormDescription" type="text" placeholder="What will happen?" value={form.description} onChange={(ev) => {
                         handleDescription(ev.target.value);
+                        setStatus("idle");
                         setDirty();
                     }} />
                 </div>
@@ -121,6 +128,7 @@ const EventForm = ({ event, closeDialog }) => {
                     <div className="EventFormCalendarForm" ref={calendarFormRef}>
                         <EventCalendar onClickDay={(value, event) => {
                             setDate(value, event);
+                            setStatus("idle");
                             setDirty();
                         }} />
                     </div>
@@ -134,6 +142,11 @@ const EventForm = ({ event, closeDialog }) => {
                     {event.title ? "Update event" : "Create event"}
                 </button>
             </div>
+            {status === "created" ? (
+                <div className="EventFormConfirmationBox">
+                    <FcCheckmark /> Your event was added to your calendar!
+                </div>
+            ) : null}
             {Prompt}
         </div>
     );

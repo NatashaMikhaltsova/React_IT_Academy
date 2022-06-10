@@ -1,6 +1,7 @@
 # Planner app
 
-A Simple Planner app built with React.js
+A Simple Planner app built with React.js.\
+The user can use the planner (month / day) to add, edit or delete events. The home page contains menu icons, the day's weather and a news feed.
 
 ## Version
 

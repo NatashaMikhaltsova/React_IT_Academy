@@ -12,10 +12,10 @@ const NewsFeed = ({ today }) => {
 		// declare the async data fetching function
 		const fetchData = async () => {
 			// get the response from the api
-			const response = await isoFetch('https://google-news.p.rapidapi.com/v1/geo_headlines?lang=en&country=BEL&geo=Minsk', {
+			const response = await isoFetch('https://google-news1.p.rapidapi.com/geolocation?geo=Minsk&country=BLR&lang=en&limit=240', {
 				headers: {
-					"x-rapidapi-key": "a23fde569amsh2fcccf77b8c2684p1cc171jsna3898ae0703d",
-					"x-rapidapi-host": "google-news.p.rapidapi.com",
+					'X-RapidAPI-Key': 'a23fde569amsh2fcccf77b8c2684p1cc171jsna3898ae0703d',
+					'X-RapidAPI-Host': 'google-news1.p.rapidapi.com'
 				},
 			});
 			// convert the data to json
@@ -40,14 +40,14 @@ const NewsFeed = ({ today }) => {
 			<div className="NewsFeedWrapper">
 				{articles.map((article) => {
 					return (
-						<a className="NewsFeedAnchorBox" target="_blank" rel="noreferrer" href={article.link} key={article.id}>
+						<a className="NewsFeedAnchorBox" target="_blank" rel="noreferrer" href={article.link} key={article.title}>
 							<div className="NewsFeedArticleBox">
 								<div className="NewsFeedTitle">
 									{article.title.slice(0, article.title.indexOf(" - "))}
 								</div>
 								<div className="NewsFeedSource">{article.source.title}</div>
 								<div className="NewsFeedDate">
-									{article.published.slice(0, article.published.indexOf(today.getFullYear()) + 4)}
+									{article.published_date.slice(0, article.published_date.indexOf('T'))}
 								</div>
 							</div>
 						</a>
@@ -56,7 +56,7 @@ const NewsFeed = ({ today }) => {
 			</div>
 		);
 	} else {
-		return <></>;
+		return <>Loading news...</>;
 	}
 };
 

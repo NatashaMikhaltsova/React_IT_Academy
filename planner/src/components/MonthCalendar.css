@@ -23,11 +23,29 @@
 
 .MonthCalendarWrapper .react-calendar__tile {
     max-width: 14.29vw;
-    height: 3vw;
+    height: 7vw;
     text-align: center;
     padding: 0.6em 0em;
     background-color: white;
     border-radius: 50px;
+}
+
+@media screen and (min-device-width: 1000px) {
+    .MonthCalendarWrapper .react-calendar__tile {
+        height: 3vw;
+    }
+}
+
+@media screen and (max-device-width: 500px) {
+    .MonthCalendarWrapper .react-calendar__tile {
+        height: 14.24vw;
+    }
+}
+
+@media screen and (device-width: 1024px) {
+    div {
+        width: 980px;
+    }
 }
 
 .MonthCalendarWrapper .react-calendar__navigation {

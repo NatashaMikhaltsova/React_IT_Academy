@@ -1,11 +1,11 @@
 import React from "react";
+import isEqual from "react-fast-compare";
 
 import DeleteEventDialog from "../components/DeleteEventDialog";
 import EditEventDialog from "../components/EditEventDialog";
 import './DayEventView.css';
 
-const DayEventView = ({ dayEvent }) => {
-
+const DayEventView = React.memo(({ dayEvent }) => {
     return (
         <div className="DayEventViewBox">
             <div className="DayEventViewRightBox">
@@ -28,6 +28,6 @@ const DayEventView = ({ dayEvent }) => {
             </div>
         </div>
     )
-}
+}, isEqual);
 
 export default DayEventView;
